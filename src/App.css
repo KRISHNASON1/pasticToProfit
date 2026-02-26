@@ -4,6 +4,13 @@
   background: var(--clr-bg);
 }
 
+/* Full-screen mode (Marketplace) — no sidebar, no margin */
+.app-layout.app-fullscreen {
+  display: block;
+  min-height: 100vh;
+  background: var(--clr-bg);
+}
+
 .main-content {
   flex: 1;
   margin-left: var(--sidebar-width);

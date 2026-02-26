@@ -1,12 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import {
+    LayoutDashboard,
+    ShoppingBag,
+    Coins,
+    MessageCircle,
+    Settings,
+    Recycle,
+    Search
+} from 'lucide-react';
+import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import './Sidebar.css';
 
 const navItems = [
-    { to: '/app/marketplace', icon: '🛍️', label: 'Marketplace' },
-    { to: '/app', icon: '📊', label: 'Dashboard', end: true },
-    { to: '/app/rewards', icon: '🪙', label: 'Rewards' },
-    { to: '/app/support', icon: '💬', label: 'Support' },
-    { to: '/app/settings', icon: '⚙️', label: 'Settings' },
+    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
+    { to: '/rewards', icon: Coins, label: 'Rewards' },
+    { to: '/support', icon: MessageCircle, label: 'Support' },
+    { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 export default function Sidebar() {
@@ -14,13 +23,14 @@ export default function Sidebar() {
         <aside className="sidebar">
             {/* Logo */}
             <div className="sidebar-logo">
-                <div className="sidebar-logo-icon">♻️</div>
-                <span className="sidebar-logo-text">PlasticToProfit</span>
+                <UpcycleLogo size={28} theme="light" />
             </div>
 
             {/* Search */}
             <div className="sidebar-search">
-                <span className="sidebar-search-icon">🔍</span>
+                <span className="sidebar-search-icon">
+                    <Search size={14} strokeWidth={2} />
+                </span>
                 <input type="text" placeholder="Search..." />
                 <span className="sidebar-search-shortcut">⌘K</span>
             </div>
@@ -33,9 +43,13 @@ export default function Sidebar() {
                         key={item.to}
                         to={item.to}
                         end={item.end}
-                        className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
+                        className={({ isActive }) =>
+                            `sidebar-nav-item ${isActive ? 'active' : ''}`
+                        }
                     >
-                        <span className="sidebar-nav-icon">{item.icon}</span>
+                        <span className="sidebar-nav-icon">
+                            <item.icon size={16} strokeWidth={2} />
+                        </span>
                         <span>{item.label}</span>
                     </NavLink>
                 ))}

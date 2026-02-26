@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+/* Medium Typography Google Fonts imported in index.html */
 
 /* ============================================
    CSS CUSTOM PROPERTIES — ECO GREEN THEME
@@ -14,7 +14,7 @@
   --clr-primary-300: #52b788;
   --clr-primary-200: #74c69d;
   --clr-primary-100: #95d5b2;
-  --clr-primary-50:  #d8f3dc;
+  --clr-primary-50: #d8f3dc;
 
   /* Accent / lime */
   --clr-accent: #a7c957;
@@ -50,10 +50,10 @@
   --clr-info: #264653;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
   --shadow-glow: 0 0 20px rgba(82, 183, 136, 0.3);
 
   /* Radius */
@@ -72,9 +72,47 @@
   --sidebar-width: 220px;
   --header-height: 64px;
 
-  /* Typography */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Outfit', 'Inter', sans-serif;
+  /* Typography — Medium.com 3-font system */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Lora', Charter, Georgia, 'Times New Roman', serif;
+  --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+  /* TYPE SCALE — matching Medium exactly */
+  --text-xs: 13px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 18px;
+  /* Medium's article body size */
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 28px;
+  --text-3xl: 32px;
+  --text-4xl: 42px;
+  --text-hero: 56px;
+  /* hero headlines */
+
+  /* LINE HEIGHTS — Medium's generous reading rhythm */
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+  /* Medium article body */
+  --leading-loose: 1.9;
+
+  /* LETTER SPACING — Medium style */
+  --tracking-tight: -0.022em;
+  /* large headings */
+  --tracking-normal: 0em;
+  --tracking-wide: 0.01em;
+  --tracking-widest: 0.08em;
+  /* labels/badges/caps */
+
+  /* FONT WEIGHTS */
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 }
 
 /* ============================================
@@ -95,13 +133,170 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Base body — Medium UI font */
 body {
-  font-family: var(--font-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-normal);
   background: var(--clr-bg);
   color: var(--clr-text);
   min-height: 100vh;
   overflow-x: hidden;
-  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   TYPOGRAPHY SYSTEM (Medium.com Style)
+   ============================================ */
+
+/* HEADINGS — Playfair Display (GT Super feel) */
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+h4 {
+  font-family: var(--font-ui);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-normal);
+}
+
+h5,
+h6 {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-normal);
+}
+
+/* BODY PARAGRAPHS — Lora (Charter feel) */
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-normal);
+}
+
+/* LEAD PARAGRAPH (section intros) */
+p.lead {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  /* Medium's elegant lead style */
+}
+
+/* UI ELEMENTS — DM Sans */
+button,
+input,
+textarea,
+select,
+label,
+.nav-item,
+.badge,
+.card-label,
+.sidebar-nav-item {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* SECTION LABELS / EYEBROWS (above headings) */
+.label,
+.eyebrow,
+.section-tag {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+/* STATS / NUMBERS (big impact numbers) */
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-4xl);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* CAPTIONS / METADATA */
+.caption,
+small,
+.meta {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-normal);
+  opacity: 0.65;
+}
+
+/* CODE / MONOSPACE */
+code,
+pre {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: var(--text-sm);
+}
+
+/* Typography Responsive Scaling */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--text-4xl);
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+  }
+
+  h3 {
+    font-size: var(--text-2xl);
+  }
+
+  p {
+    font-size: var(--text-base);
+  }
+
+  p.lead {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+  }
+
+  p.lead {
+    font-size: var(--text-md);
+  }
 }
 
 a {
@@ -117,7 +312,8 @@ button {
   font-size: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -126,7 +322,9 @@ img {
   display: block;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   border: none;
@@ -140,13 +338,16 @@ input, textarea, select {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--clr-primary-200);
   border-radius: var(--radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--clr-primary-300);
 }
@@ -155,43 +356,98 @@ input, textarea, select {
    KEYFRAME ANIMATIONS
    ============================================ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes countUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes badgePing {
-  0%   { transform: scale(1); opacity: 1; }
-  75%, 100% { transform: scale(2); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
 /* ============================================
@@ -200,6 +456,7 @@ input, textarea, select {
 .animate-fade-in {
   animation: fadeIn 0.5s ease forwards;
 }
+
 .animate-slide-in {
   animation: slideInUp 0.5s ease forwards;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Recycle } from 'lucide-react';
 import { UpcycleLogo } from '../../components/Logo/UpcycleLogo';
 import { products } from '../../data/products';
 import './LandingPage.css';
@@ -145,9 +146,12 @@ export default function LandingPage() {
     <div className="landing-page">
       {/* ─── HERO ─── */}
       <section className="lp-hero" id="hero">
-        <div className="lp-hero-float-1" />
-        <div className="lp-hero-float-2" />
-        <div className="lp-hero-float-3" />
+        {/* Background Video Layer */}
+        <video autoPlay muted loop playsInline className="lp-hero-bg-video">
+          <source src="/src/assets/videos/hero-transform.mp4" type="video/mp4" />
+        </video>
+        <div className="lp-hero-overlay"></div>
+        <div className="lp-hero-bottom-gradient"></div>
 
         <div className="lp-hero-inner">
           <div className="lp-hero-content">
@@ -175,15 +179,6 @@ export default function LandingPage() {
                   🎟️ Start Recycling — Trash to Tickets
                 </button>
               </Link>
-            </div>
-          </div>
-
-          <div className="lp-hero-visual">
-            <div className="lp-hero-3d-placeholder">
-              <div className="lp-hero-3d-inner">
-                <span className="lp-hero-3d-icon">🏺</span>
-                <span className="lp-hero-3d-label">Interactive 3D Model</span>
-              </div>
             </div>
           </div>
         </div>

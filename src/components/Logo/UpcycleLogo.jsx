@@ -3,8 +3,8 @@ import React from 'react';
 export const UpcycleLogo = ({ size = 32, theme = 'dark', showText = true, className = '' }) => {
     // The mark is always the brand orange accent
     const markColor = '#f97316';
-    // Text color flips based on the theme
-    const textColor = theme === 'dark' ? 'var(--clr-text, #1a1a2e)' : '#ffffff';
+    // Text color updated to green theme color as requested
+    const textColor = '#059669';
 
     return (
         <div

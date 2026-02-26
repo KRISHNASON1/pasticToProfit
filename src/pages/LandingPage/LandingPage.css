@@ -220,9 +220,11 @@
   align-items: center;
   gap: 10px;
   padding: 16px 32px;
-  background: transparent;
-  color: var(--lp-graphite-800);
-  border: 1.5px solid var(--lp-graphite-200);
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 14px;
   font-size: 15px;
   font-weight: 600;
@@ -233,9 +235,10 @@
 
 .lp-btn-secondary:hover {
   transform: translateY(-3px);
-  border-color: var(--lp-emerald-400);
-  color: var(--lp-emerald-700);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 

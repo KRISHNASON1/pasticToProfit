@@ -7,6 +7,7 @@ import Marketplace from './pages/Marketplace/Marketplace';
 import Rewards from './pages/Rewards/Rewards';
 import Support from './pages/Support/Support';
 import Settings from './pages/Settings/Settings';
+import Solutions from './pages/Solutions/Solutions';
 import './App.css';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
                 <Route path="/rewards" element={<Rewards />} />
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/solutions" element={<Solutions />} />
               </Routes>
             </div>
           </main>

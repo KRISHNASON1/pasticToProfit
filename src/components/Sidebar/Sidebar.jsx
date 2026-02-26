@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { Lightbulb } from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
     { to: '/marketplace', icon: '🛍️', label: 'Marketplace' },
     { to: '/', icon: '📊', label: 'Dashboard', end: true },
+    { to: '/solutions', icon: null, label: 'Solutions', lucide: Lightbulb },
     { to: '/rewards', icon: '🪙', label: 'Rewards' },
     { to: '/support', icon: '💬', label: 'Support' },
     { to: '/settings', icon: '⚙️', label: 'Settings' },
@@ -35,7 +37,9 @@ export default function Sidebar() {
                         end={item.end}
                         className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
                     >
-                        <span className="sidebar-nav-icon">{item.icon}</span>
+                        <span className="sidebar-nav-icon">
+                            {item.lucide ? <item.lucide size={16} strokeWidth={2} /> : item.icon}
+                        </span>
                         <span>{item.label}</span>
                     </NavLink>
                 ))}

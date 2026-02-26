@@ -1,14 +1,21 @@
 import { NavLink } from 'react-router-dom';
-import { Lightbulb } from 'lucide-react';
+import { 
+    LayoutDashboard, 
+    ShoppingBag, 
+    Coins, 
+    MessageCircle, 
+    Settings,
+    Recycle,
+    Search
+} from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
-    { to: '/marketplace', icon: '🛍️', label: 'Marketplace' },
-    { to: '/', icon: '📊', label: 'Dashboard', end: true },
-    { to: '/solutions', icon: null, label: 'Solutions', lucide: Lightbulb },
-    { to: '/rewards', icon: '🪙', label: 'Rewards' },
-    { to: '/support', icon: '💬', label: 'Support' },
-    { to: '/settings', icon: '⚙️', label: 'Settings' },
+    { to: '/app',            icon: LayoutDashboard,  label: 'Dashboard',   end: true },
+    { to: '/app/marketplace', icon: ShoppingBag,      label: 'Marketplace' },
+    { to: '/app/rewards',     icon: Coins,            label: 'Rewards' },
+    { to: '/app/support',     icon: MessageCircle,    label: 'Support' },
+    { to: '/app/settings',    icon: Settings,         label: 'Settings' },
 ];
 
 export default function Sidebar() {
@@ -16,13 +23,17 @@ export default function Sidebar() {
         <aside className="sidebar">
             {/* Logo */}
             <div className="sidebar-logo">
-                <div className="sidebar-logo-icon">♻️</div>
+                <div className="sidebar-logo-icon">
+                    <Recycle size={20} strokeWidth={2} />
+                </div>
                 <span className="sidebar-logo-text">PlasticToProfit</span>
             </div>
 
             {/* Search */}
             <div className="sidebar-search">
-                <span className="sidebar-search-icon">🔍</span>
+                <span className="sidebar-search-icon">
+                    <Search size={14} strokeWidth={2} />
+                </span>
                 <input type="text" placeholder="Search..." />
                 <span className="sidebar-search-shortcut">⌘K</span>
             </div>
@@ -35,10 +46,12 @@ export default function Sidebar() {
                         key={item.to}
                         to={item.to}
                         end={item.end}
-                        className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
+                        className={({ isActive }) => 
+                            `sidebar-nav-item ${isActive ? 'active' : ''}`
+                        }
                     >
                         <span className="sidebar-nav-icon">
-                            {item.lucide ? <item.lucide size={16} strokeWidth={2} /> : item.icon}
+                            <item.icon size={16} strokeWidth={2} />
                         </span>
                         <span>{item.label}</span>
                     </NavLink>

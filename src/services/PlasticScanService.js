@@ -101,7 +101,11 @@ If no plastic is visible, return { "items": [], "confidence": 0.5, "summary": "N
                 const text = json.candidates?.[0]?.content?.parts?.[0]?.text;
                 if (!text) throw new Error('Empty Gemini response');
 
-                const match = text.match(/\{[\s\S]*\}/);
+                console.log(`[PlasticScan] Raw ${model} response:`, text.slice(0, 300));
+
+                // Strip markdown code fences if present (```json ... ```)
+                const cleaned = text.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
+                const match = cleaned.match(/\{[\s\S]*\}/);
                 if (!match) throw new Error('No JSON in Gemini response');
 
                 console.log(`[PlasticScan] ✅ ${model} succeeded!`);

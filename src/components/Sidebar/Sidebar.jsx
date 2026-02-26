@@ -8,11 +8,11 @@ import {
     Recycle,
     Search
 } from 'lucide-react';
+import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import './Sidebar.css';
 
 const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
-    { to: '/marketplace', icon: ShoppingBag, label: 'Marketplace' },
     { to: '/rewards', icon: Coins, label: 'Rewards' },
     { to: '/support', icon: MessageCircle, label: 'Support' },
     { to: '/settings', icon: Settings, label: 'Settings' },
@@ -23,10 +23,7 @@ export default function Sidebar() {
         <aside className="sidebar">
             {/* Logo */}
             <div className="sidebar-logo">
-                <div className="sidebar-logo-icon">
-                    <Recycle size={20} strokeWidth={2} />
-                </div>
-                <span className="sidebar-logo-text">PlasticToProfit</span>
+                <UpcycleLogo size={28} theme="light" />
             </div>
 
             {/* Search */}

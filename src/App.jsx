@@ -38,6 +38,21 @@ function PublicLayout({ children }) {
   );
 }
 
+/* Marketplace Layout — no sidebar, with Public Navbar and Cart */
+function MarketplaceLayout({ children }) {
+  return (
+    <div className="app-layout">
+      <PublicNavbar />
+      <main className="main-content" style={{ marginLeft: 0, padding: 0 }}>
+        <div className="main-inner" style={{ borderRadius: 0, marginTop: '70px', minHeight: 'calc(100vh - 70px)' }}>
+          {children}
+        </div>
+      </main>
+      <Cart />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -50,10 +65,12 @@ export default function App() {
 
           {/* Internal platform — sidebar layout */}
           <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/marketplace" element={<AppLayout><Marketplace /></AppLayout>} />
           <Route path="/rewards" element={<AppLayout><Rewards /></AppLayout>} />
           <Route path="/support" element={<AppLayout><Support /></AppLayout>} />
           <Route path="/settings" element={<AppLayout><Settings /></AppLayout>} />
+
+          {/* Hybrid layout — Marketplace has no sidebar but has Cart and Public Navbar */}
+          <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
         </Routes>
       </CartProvider>
     </BrowserRouter>

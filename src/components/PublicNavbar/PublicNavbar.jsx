@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import './PublicNavbar.css';
 
 export default function PublicNavbar() {
@@ -13,11 +14,13 @@ export default function PublicNavbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const isDarkHero = location.pathname === '/epr';
+    const logoTheme = (isDarkHero && !navScrolled) ? 'light' : 'dark';
+
     return (
         <nav className={`lp-nav ${navScrolled ? 'scrolled' : ''}`}>
-            <Link to="/" className="lp-nav-logo">
-                <div className="lp-nav-logo-icon">♻️</div>
-                PlasticToProfit
+            <Link to="/" className="lp-nav-logo" style={{ textDecoration: 'none' }}>
+                <UpcycleLogo size={28} theme={logoTheme} />
             </Link>
             <div className="lp-nav-links">
                 {isLandingPage ? (
@@ -28,7 +31,7 @@ export default function PublicNavbar() {
                 <Link to="/marketplace">Marketplace</Link>
                 <Link to="/epr">EPR</Link>
                 <Link to="/solutions">Solutions</Link>
-                <Link to="/dashboard" className="lp-nav-cta">Go to My Dashboard →</Link>
+                <Link to="/dashboard" className="lp-nav-cta">My Dashboard</Link>
             </div>
         </nav>
     );

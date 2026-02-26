@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { UpcycleLogo } from '../../components/Logo/UpcycleLogo';
 import { products } from '../../data/products';
 import './LandingPage.css';
 
@@ -492,7 +493,7 @@ export default function LandingPage() {
             We're Building India's <br />Circular Economy Engine
           </h2>
           <p className="lp-section-subtitle" style={{ maxWidth: 680 }}>
-            PlasticToProfit was born from a simple idea: what if every piece of plastic
+            Upcycle was born from a simple idea: what if every piece of plastic
             waste could generate value for every person it touches — from the household
             that discards it to the artisan who transforms it?
           </p>
@@ -534,7 +535,7 @@ export default function LandingPage() {
           <div className="lp-footer-grid">
             <div className="lp-footer-brand">
               <div className="lp-footer-brand-name">
-                ♻️ PlasticToProfit
+                <UpcycleLogo size={32} theme="light" />
               </div>
               <p className="lp-footer-brand-desc">
                 The complete circular economy platform transforming household plastic
@@ -570,7 +571,7 @@ export default function LandingPage() {
 
           <div className="lp-footer-bottom">
             <span className="lp-footer-copy">
-              © 2026 PlasticToProfit. Built with purpose.
+              © 2026 Upcycle. Built with purpose.
             </span>
             <div className="lp-footer-socials">
               <span className="lp-footer-social">𝕏</span>

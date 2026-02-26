@@ -4,7 +4,6 @@
 }
 
 .rewards-page-title {
-    font-family: var(--font-display);
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
@@ -55,7 +54,6 @@
 }
 
 .rewards-balance-value {
-    font-family: var(--font-display);
     font-size: 48px;
     font-weight: 800;
     line-height: 1;
@@ -216,7 +214,6 @@
 }
 
 .transactions-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 16px;

@@ -118,8 +118,6 @@ function getBadgeClass(badge) {
    LANDING PAGE COMPONENT
    ============================================ */
 export default function LandingPage() {
-  const [navScrolled, setNavScrolled] = useState(false);
-
   // Counters
   const [plasticCount, plasticRef] = useCountUp(1240, 2200);
   const [royaltyCount, royaltyRef] = useCountUp(45000, 2400);
@@ -137,13 +135,6 @@ export default function LandingPage() {
   const ecoCardRef = useMultiReveal(3);
   const productCardRef = useMultiReveal(4);
 
-  // Sticky nav scroll
-  useEffect(() => {
-    const handleScroll = () => setNavScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   // Top products for teaser
   const featuredProducts = products.filter(p =>
     ['luxury', 'handmade', 'diy', 'fashion'].includes(p.category)
@@ -151,21 +142,6 @@ export default function LandingPage() {
 
   return (
     <div className="landing-page">
-      {/* ─── NAVBAR ─── */}
-      <nav className={`lp-nav ${navScrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="lp-nav-logo">
-          <div className="lp-nav-logo-icon">♻️</div>
-          PlasticToProfit
-        </Link>
-        <div className="lp-nav-links">
-          <a href="#how-it-works">How It Works</a>
-          <a href="#marketplace">Marketplace</a>
-          <a href="#creators">Creators</a>
-          <a href="#corporate">Corporate</a>
-          <Link to="/app" className="lp-nav-cta">Enter Platform →</Link>
-        </div>
-      </nav>
-
       {/* ─── HERO ─── */}
       <section className="lp-hero" id="hero">
         <div className="lp-hero-float-1" />
@@ -187,13 +163,13 @@ export default function LandingPage() {
               and B2B corporations to exchange waste for tangible wealth.
             </p>
             <div className="lp-hero-ctas">
-              <Link to="/app/marketplace">
+              <Link to="/marketplace">
                 <button className="lp-btn-primary">
                   Explore the Marketplace
                   <span>→</span>
                 </button>
               </Link>
-              <Link to="/app">
+              <Link to="/dashboard">
                 <button className="lp-btn-secondary">
                   🎟️ Start Recycling — Trash to Tickets
                 </button>
@@ -312,7 +288,7 @@ export default function LandingPage() {
         <div className="lp-products-scroll">
           {featuredProducts.map((product, i) => (
             <Link
-              to="/app/marketplace"
+              to="/marketplace"
               key={product.id}
               className={`lp-product-card reveal reveal-delay-${i + 1}`}
               ref={productCardRef(i)}
@@ -385,7 +361,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <Link to="/app">
+            <Link to="/dashboard">
               <button className="lp-btn-primary">
                 Join the Artisan Network
                 <span>→</span>
@@ -479,7 +455,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <Link to="/app/support">
+            <Link to="/support">
               <button className="lp-btn-primary">
                 Partner With Us
                 <span>→</span>
@@ -498,15 +474,59 @@ export default function LandingPage() {
             circular economy — one bottle at a time.
           </p>
           <div className="lp-cta-banner-actions">
-            <Link to="/app">
+            <Link to="/dashboard">
               <button className="lp-btn-primary">Get Started Free →</button>
             </Link>
-            <a href="#how-it-works">
-              <button className="lp-btn-secondary">Learn How It Works</button>
+            <a href="#about-us">
+              <button className="lp-btn-secondary">Learn About Us</button>
             </a>
           </div>
         </div>
       </div>
+
+      {/* ─── ABOUT US ─── */}
+      <section className="lp-section lp-about" id="about-us">
+        <div className="lp-about-inner">
+          <div className="lp-section-tag">About Us</div>
+          <h2 className="lp-section-title">
+            We're Building India's <br />Circular Economy Engine
+          </h2>
+          <p className="lp-section-subtitle" style={{ maxWidth: 680 }}>
+            PlasticToProfit was born from a simple idea: what if every piece of plastic
+            waste could generate value for every person it touches — from the household
+            that discards it to the artisan who transforms it?
+          </p>
+
+          <div className="lp-about-grid">
+            <div className="lp-about-card">
+              <div className="lp-about-card-icon">🎯</div>
+              <h4>Our Mission</h4>
+              <p>
+                To make plastic recycling profitable for everyone in the chain —
+                households, artisans, and corporations — through technology, transparency,
+                and community.
+              </p>
+            </div>
+            <div className="lp-about-card">
+              <div className="lp-about-card-icon">🔗</div>
+              <h4>Our Approach</h4>
+              <p>
+                A 3-layer ecosystem: AI-powered collection at campus sprints,
+                artisan upcycling into premium products, and a verified marketplace
+                with NFC-traced provenance.
+              </p>
+            </div>
+            <div className="lp-about-card">
+              <div className="lp-about-card-icon">🌍</div>
+              <h4>Our Impact</h4>
+              <p>
+                12,400+ kg of plastic diverted, ₹45,000+ in artisan royalties paid,
+                and 28 campus collection drives completed across Delhi-NCR — and growing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── FOOTER ─── */}
       <footer className="lp-footer">
@@ -525,17 +545,17 @@ export default function LandingPage() {
 
             <div className="lp-footer-col">
               <h4>Platform</h4>
-              <Link to="/app/marketplace">Marketplace</Link>
-              <Link to="/app">Dashboard</Link>
-              <Link to="/app/rewards">Rewards</Link>
-              <a href="#how-it-works">How It Works</a>
+              <Link to="/marketplace">Marketplace</Link>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/rewards">Rewards</Link>
+              <Link to="/solutions">Solutions</Link>
             </div>
 
             <div className="lp-footer-col">
               <h4>Community</h4>
               <a href="#creators">Creator Hub</a>
               <a href="#corporate">Corporate EPR</a>
-              <Link to="/app/support">Support</Link>
+              <Link to="/support">Support</Link>
               <a href="#">Blog</a>
             </div>
 

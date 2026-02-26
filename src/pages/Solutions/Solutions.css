@@ -60,7 +60,6 @@
 }
 
 .sol-hero-title {
-    font-family: var(--font-display);
     font-size: 32px;
     font-weight: 800;
     line-height: 1.2;
@@ -154,7 +153,6 @@
 }
 
 .sol-card-title {
-    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
     line-height: 1.3;
@@ -221,7 +219,6 @@
 }
 
 .sol-trust-value {
-    font-family: var(--font-display);
     font-size: 22px;
     font-weight: 800;
     color: white;

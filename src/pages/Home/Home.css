@@ -53,7 +53,6 @@
 }
 
 .welcome-name {
-    font-family: var(--font-display);
     font-size: 26px;
     font-weight: 800;
     line-height: 1.2;
@@ -93,7 +92,6 @@
 }
 
 .welcome-balance-value {
-    font-family: var(--font-display);
     font-size: 36px;
     font-weight: 800;
     line-height: 1;
@@ -120,7 +118,6 @@
 
 /* Quick Actions */
 .quick-actions-title {
-    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 14px;
@@ -183,7 +180,6 @@
 }
 
 .quick-action-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -252,7 +248,6 @@
 }
 
 .next-drive-name {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 4px;
@@ -317,7 +312,6 @@
 }
 
 .impact-card-value {
-    font-family: var(--font-display);
     font-size: 22px;
     font-weight: 800;
     color: var(--clr-primary-700);
@@ -342,7 +336,6 @@
 }
 
 .how-it-works-title {
-    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 16px;
@@ -376,7 +369,6 @@
     position: absolute;
     top: 12px;
     right: 14px;
-    font-family: var(--font-display);
     font-size: 32px;
     font-weight: 800;
     color: var(--clr-primary-50);
@@ -409,7 +401,6 @@
 }
 
 .home-activity-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 14px;

@@ -4,11 +4,8 @@
    ============================================ */
 
 /* ---------- Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
 
 :root {
-  --lp-font-display: 'Syne', sans-serif;
-  --lp-font-body: 'DM Sans', sans-serif;
 
   /* Graphite */
   --lp-graphite-950: #0d0d14;
@@ -49,7 +46,6 @@
   min-height: 100vh;
   background: var(--lp-off-white);
   overflow-x: hidden;
-  font-family: var(--lp-font-body);
   color: var(--lp-graphite-900);
 }
 
@@ -58,7 +54,7 @@
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -66,96 +62,26 @@
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
-
-/* ============================================
-   STICKY NAVBAR
-   ============================================ */
-.lp-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 0 48px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.reveal-delay-1 {
+  transition-delay: 0.1s;
 }
 
-.lp-nav.scrolled {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.05);
+.reveal-delay-2 {
+  transition-delay: 0.2s;
 }
 
-.lp-nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--lp-font-display);
-  font-weight: 800;
-  font-size: 20px;
-  color: var(--lp-graphite-900);
-  text-decoration: none;
+.reveal-delay-3 {
+  transition-delay: 0.3s;
 }
 
-.lp-nav-logo-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--lp-emerald-500), var(--lp-emerald-700));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: white;
+.reveal-delay-4 {
+  transition-delay: 0.4s;
 }
 
-.lp-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
+.reveal-delay-5 {
+  transition-delay: 0.5s;
 }
 
-.lp-nav-links a {
-  font-family: var(--lp-font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--lp-graphite-600);
-  text-decoration: none;
-  transition: color 0.2s ease;
-  letter-spacing: 0.01em;
-}
-
-.lp-nav-links a:hover {
-  color: var(--lp-emerald-600);
-}
-
-.lp-nav-cta {
-  padding: 10px 24px;
-  background: var(--lp-graphite-900);
-  color: var(--lp-white) !important;
-  border-radius: 100px;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  transition: all 0.3s ease !important;
-  letter-spacing: 0.02em;
-}
-
-.lp-nav-cta:hover {
-  background: var(--lp-emerald-700) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
-}
 
 /* ============================================
    HERO SECTION
@@ -233,7 +159,6 @@
 }
 
 .lp-hero h1 {
-  font-family: var(--lp-font-display);
   font-size: clamp(42px, 5.5vw, 72px);
   font-weight: 800;
   line-height: 1.05;
@@ -273,7 +198,6 @@
   color: white;
   border: none;
   border-radius: 14px;
-  font-family: var(--lp-font-body);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -297,7 +221,6 @@
   color: var(--lp-graphite-800);
   border: 1.5px solid var(--lp-graphite-200);
   border-radius: 14px;
-  font-family: var(--lp-font-body);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -333,7 +256,7 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15),
-              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
 
 .lp-hero-3d-placeholder::before {
@@ -361,7 +284,6 @@
 }
 
 .lp-hero-3d-label {
-  font-family: var(--lp-font-body);
   font-size: 13px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
@@ -444,7 +366,6 @@
 }
 
 .lp-impact-number {
-  font-family: var(--lp-font-display);
   font-size: 42px;
   font-weight: 800;
   color: var(--lp-emerald-400);
@@ -495,7 +416,6 @@
 }
 
 .lp-section-title {
-  font-family: var(--lp-font-display);
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 800;
   line-height: 1.1;
@@ -595,7 +515,6 @@
 }
 
 .lp-ecosystem-card-label {
-  font-family: var(--lp-font-display);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -605,7 +524,6 @@
 }
 
 .lp-ecosystem-card h3 {
-  font-family: var(--lp-font-display);
   font-size: 24px;
   font-weight: 700;
   color: var(--lp-graphite-900);
@@ -740,7 +658,6 @@
 }
 
 .lp-product-name {
-  font-family: var(--lp-font-display);
   font-size: 16px;
   font-weight: 700;
   color: var(--lp-graphite-900);
@@ -770,7 +687,6 @@
 }
 
 .lp-product-price {
-  font-family: var(--lp-font-display);
   font-size: 20px;
   font-weight: 800;
   color: var(--lp-graphite-900);
@@ -873,7 +789,6 @@
 }
 
 .lp-diy-feature-text h4 {
-  font-family: var(--lp-font-display);
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -933,7 +848,6 @@
 }
 
 .lp-diy-cell-title {
-  font-family: var(--lp-font-display);
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -996,7 +910,6 @@
 }
 
 .lp-b2b-stat-val {
-  font-family: var(--lp-font-display);
   font-size: 28px;
   font-weight: 800;
   color: var(--lp-emerald-700);
@@ -1082,7 +995,6 @@
 }
 
 .lp-footer-brand-name {
-  font-family: var(--lp-font-display);
   font-size: 22px;
   font-weight: 800;
   margin-bottom: 14px;
@@ -1099,7 +1011,6 @@
 }
 
 .lp-footer-col h4 {
-  font-family: var(--lp-font-display);
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1201,7 +1112,6 @@
 }
 
 .lp-cta-banner h2 {
-  font-family: var(--lp-font-display);
   font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 800;
   color: white;
@@ -1260,12 +1170,10 @@
   font-size: 80px;
   line-height: 1;
   color: var(--lp-emerald-200);
-  font-family: Georgia, serif;
   margin-bottom: -20px;
 }
 
 .lp-quote-text {
-  font-family: var(--lp-font-display);
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 700;
   line-height: 1.4;
@@ -1432,22 +1340,117 @@
 }
 
 /* ============================================
+   ABOUT US
+   ============================================ */
+.lp-about {
+  background: var(--lp-off-white);
+  text-align: center;
+}
+
+.lp-about-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.lp-about .lp-section-tag {
+  justify-content: center;
+}
+
+.lp-about .lp-section-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lp-about .lp-section-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 56px;
+}
+
+.lp-about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.lp-about-card {
+  background: var(--lp-white);
+  border: 1px solid var(--lp-graphite-100);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lp-about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+  border-color: var(--lp-emerald-200);
+}
+
+.lp-about-card-icon {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.lp-about-card h4 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--lp-graphite-900);
+  margin-bottom: 12px;
+}
+
+.lp-about-card p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--lp-graphite-500);
+}
+
+@media (max-width: 768px) {
+  .lp-about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
    EXTRA ANIMATIONS
    ============================================ */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .lp-btn-primary {

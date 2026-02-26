@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { 
-    LayoutDashboard, 
-    ShoppingBag, 
-    Coins, 
-    MessageCircle, 
+import {
+    LayoutDashboard,
+    ShoppingBag,
+    Coins,
+    MessageCircle,
     Settings,
     Recycle,
     Search
@@ -11,11 +11,11 @@ import {
 import './Sidebar.css';
 
 const navItems = [
-    { to: '/app',            icon: LayoutDashboard,  label: 'Dashboard',   end: true },
-    { to: '/app/marketplace', icon: ShoppingBag,      label: 'Marketplace' },
-    { to: '/app/rewards',     icon: Coins,            label: 'Rewards' },
-    { to: '/app/support',     icon: MessageCircle,    label: 'Support' },
-    { to: '/app/settings',    icon: Settings,         label: 'Settings' },
+    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
+    { to: '/marketplace', icon: ShoppingBag, label: 'Marketplace' },
+    { to: '/rewards', icon: Coins, label: 'Rewards' },
+    { to: '/support', icon: MessageCircle, label: 'Support' },
+    { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 export default function Sidebar() {
@@ -46,7 +46,7 @@ export default function Sidebar() {
                         key={item.to}
                         to={item.to}
                         end={item.end}
-                        className={({ isActive }) => 
+                        className={({ isActive }) =>
                             `sidebar-nav-item ${isActive ? 'active' : ''}`
                         }
                     >

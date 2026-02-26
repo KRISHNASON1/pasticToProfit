@@ -4,7 +4,6 @@
 }
 
 .scan-page-title {
-    font-family: var(--font-display);
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
@@ -60,7 +59,6 @@
 }
 
 .scan-upload-title {
-    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -132,7 +130,6 @@
 }
 
 .scan-result-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 20px;
@@ -157,7 +154,6 @@
 }
 
 .scan-result-type-name {
-    font-family: var(--font-display);
     font-size: 20px;
     font-weight: 800;
     color: var(--clr-primary-700);
@@ -206,7 +202,6 @@
     background: linear-gradient(135deg, var(--clr-primary-700), var(--clr-primary-500));
     border-radius: var(--radius-lg);
     color: white;
-    font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
     animation: pulse 2s ease infinite;
@@ -222,7 +217,6 @@
 }
 
 .scan-tips-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 14px;
@@ -274,7 +268,6 @@
 }
 
 .plastic-guide-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 14px;
@@ -353,7 +346,6 @@
 }
 
 .recent-scans-title {
-    font-family: var(--font-display);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 14px;

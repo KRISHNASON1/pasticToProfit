@@ -1,12 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import {
+    LayoutDashboard,
+    ShoppingBag,
+    Coins,
+    MessageCircle,
+    Settings,
+    Recycle,
+    Search
+} from 'lucide-react';
+import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import './Sidebar.css';
 
 const navItems = [
-    { to: '/', icon: '📊', label: 'Dashboard' },
-    { to: '/analytics', icon: '📈', label: 'Analytics' },
-    { to: '/rewards', icon: '🪙', label: 'Rewards', badge: '3', badgeColor: 'green' },
-    { to: '/support', icon: '💬', label: 'Support', badge: 'Live', badgeColor: 'red' },
-    { to: '/settings', icon: '⚙️', label: 'Settings' },
+    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
+    { to: '/rewards', icon: Coins, label: 'Rewards' },
+    { to: '/support', icon: MessageCircle, label: 'Support' },
+    { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 export default function Sidebar() {
@@ -14,8 +23,7 @@ export default function Sidebar() {
         <aside className="sidebar">
             {/* Logo */}
             <div className="sidebar-logo">
-                <div className="sidebar-logo-icon">♻️</div>
-                <span className="sidebar-logo-text">PlasticToProfit</span>
+                <UpcycleLogo size={28} theme="light" />
             </div>
 
             {/* Marketplace dropdown */}
@@ -27,7 +35,9 @@ export default function Sidebar() {
 
             {/* Search */}
             <div className="sidebar-search">
-                <span className="sidebar-search-icon">🔍</span>
+                <span className="sidebar-search-icon">
+                    <Search size={14} strokeWidth={2} />
+                </span>
                 <input type="text" placeholder="Search..." />
                 <span className="sidebar-search-shortcut">⌘K</span>
             </div>
@@ -39,10 +49,14 @@ export default function Sidebar() {
                     <NavLink
                         key={item.to}
                         to={item.to}
-                        className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
-                        end={item.to === '/'}
+                        end={item.end}
+                        className={({ isActive }) =>
+                            `sidebar-nav-item ${isActive ? 'active' : ''}`
+                        }
                     >
-                        <span className="sidebar-nav-icon">{item.icon}</span>
+                        <span className="sidebar-nav-icon">
+                            <item.icon size={16} strokeWidth={2} />
+                        </span>
                         <span>{item.label}</span>
                         {item.badge && (
                             <span className={`sidebar-nav-badge ${item.badgeColor}`}>{item.badge}</span>

@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getNewArrivals, getSaleProducts } from '../../data/products';
 import { rewardsData, userImpactStats } from '../../data/stats';
+import ScanModal from '../../components/ScanModal/ScanModal';
 import './Dashboard.css';
 
 // Sample recommended products
@@ -32,9 +34,11 @@ const miniStats = [
 export default function Dashboard() {
     const { balance, tier, nextTier, nextTierAt } = rewardsData;
     const tierPct = Math.round((balance / nextTierAt) * 100);
+    const [scanOpen, setScanOpen] = useState(false);
 
     return (
         <div className="page-wrapper">
+            {scanOpen && <ScanModal onClose={() => setScanOpen(false)} />}
             {/* Top bar */}
             <div style={{ padding: '16px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
                 <div>
@@ -76,7 +80,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Scan */}
-                    <div className="db-card db-card-scan">
+                    <div className="db-card db-card-scan" onClick={() => setScanOpen(true)} style={{ cursor: 'pointer' }}>
                         <div className="db-card-label">📸 Scan Waste</div>
                         <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>Classify & Earn</div>
                         <div style={{ fontSize: 11, color: 'var(--clr-text-muted)', marginBottom: 8 }}>Snap a photo → instant coins</div>

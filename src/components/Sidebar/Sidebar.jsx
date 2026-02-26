@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
 
 const navItems = [
-    { to: '/marketplace', icon: '🛍️', label: 'Marketplace' },
-    { to: '/', icon: '📊', label: 'Dashboard', end: true },
-    { to: '/rewards', icon: '🪙', label: 'Rewards' },
-    { to: '/support', icon: '💬', label: 'Support' },
-    { to: '/settings', icon: '⚙️', label: 'Settings' },
+    { to: '/app/marketplace', icon: '🛍️', label: 'Marketplace' },
+    { to: '/app', icon: '📊', label: 'Dashboard', end: true },
+    { to: '/app/rewards', icon: '🪙', label: 'Rewards' },
+    { to: '/app/support', icon: '💬', label: 'Support' },
+    { to: '/app/settings', icon: '⚙️', label: 'Settings' },
 ];
 
 export default function Sidebar() {

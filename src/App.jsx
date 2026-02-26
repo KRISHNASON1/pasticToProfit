@@ -7,7 +7,7 @@ import Marketplace from './pages/Marketplace/Marketplace';
 import Rewards from './pages/Rewards/Rewards';
 import Support from './pages/Support/Support';
 import Settings from './pages/Settings/Settings';
-import './App.css';
+import './App.css'; 
 
 export default function App() {
   return (

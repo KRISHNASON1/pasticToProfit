@@ -1,0 +1,603 @@
+/* ============================================================
+   SCAN MODAL — Full scan flow
+   ============================================================ */
+
+/* Backdrop */
+.scan-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.25s ease;
+    padding: 20px;
+}
+
+/* Modal box */
+.scan-modal {
+    background: var(--clr-surface);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    animation: slideInUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+/* Header */
+.scan-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--clr-border-light);
+}
+
+.scan-modal-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scan-modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    line-height: 1;
+}
+
+.scan-modal-close:hover {
+    background: var(--clr-border);
+    transform: scale(1.1);
+}
+
+/* Body padding */
+.scan-modal-body {
+    padding: 24px;
+}
+
+/* ---- Step 1: Pick source ---- */
+.scan-source-title {
+    text-align: center;
+    font-size: 14px;
+    color: var(--clr-text-secondary);
+    margin-bottom: 20px;
+}
+
+.scan-source-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.scan-source-btn {
+    padding: 28px 16px;
+    border-radius: 16px;
+    border: 2px dashed var(--clr-border);
+    background: var(--clr-bg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.scan-source-btn:hover {
+    border-color: var(--clr-primary-400);
+    background: var(--clr-primary-50);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.scan-source-icon {
+    font-size: 40px;
+}
+
+.scan-source-label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.scan-source-sub {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+}
+
+/* ---- Step 2: Preview + Scanning ---- */
+.scan-preview-area {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: #0e1a14;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scan-preview-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Scanning overlay */
+.scan-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #22c55e, transparent);
+    animation: scanLine 1.5s ease-in-out infinite;
+    box-shadow: 0 0 12px #22c55e;
+}
+
+@keyframes scanLine {
+    0% {
+        top: 10%;
+    }
+
+    50% {
+        top: 90%;
+    }
+
+    100% {
+        top: 10%;
+    }
+}
+
+.scan-overlay-text {
+    color: white;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.scan-overlay-sub {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 11px;
+}
+
+/* Corner brackets */
+.scan-corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #22c55e;
+    border-style: solid;
+    opacity: 0.9;
+}
+
+.scan-corner.tl {
+    top: 12px;
+    left: 12px;
+    border-width: 3px 0 0 3px;
+    border-radius: 4px 0 0 0;
+}
+
+.scan-corner.tr {
+    top: 12px;
+    right: 12px;
+    border-width: 3px 3px 0 0;
+    border-radius: 0 4px 0 0;
+}
+
+.scan-corner.bl {
+    bottom: 12px;
+    left: 12px;
+    border-width: 0 0 3px 3px;
+    border-radius: 0 0 0 4px;
+}
+
+.scan-corner.br {
+    bottom: 12px;
+    right: 12px;
+    border-width: 0 3px 3px 0;
+    border-radius: 0 0 4px 0;
+}
+
+/* Dots loader */
+.scan-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.scan-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: bounceDot 0.8s ease infinite;
+}
+
+.scan-dot:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.scan-dot:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes bounceDot {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---- Step 3: Results ---- */
+.scan-result-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.scan-result-header h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.scan-detected-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.scan-detected-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border-light);
+    border-radius: 12px;
+    padding: 12px 16px;
+    animation: slideInUp 0.4s ease forwards;
+}
+
+.scan-detected-item:nth-child(2) {
+    animation-delay: 0.12s;
+    opacity: 0;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scan-item-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.scan-item-info {
+    flex: 1;
+}
+
+.scan-item-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.scan-item-type {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+}
+
+.scan-item-qty {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--clr-primary-700);
+    flex-shrink: 0;
+}
+
+.scan-item-unit {
+    font-size: 10px;
+    color: var(--clr-text-muted);
+    text-align: center;
+}
+
+/* Earnings box */
+.scan-earnings {
+    background: linear-gradient(135deg, #1a472a, #2d6a4f);
+    border-radius: 16px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+    color: white;
+}
+
+.scan-earning-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.scan-earning-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.65;
+}
+
+.scan-earning-value {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.scan-earning-sub {
+    font-size: 10px;
+    opacity: 0.55;
+}
+
+/* Action buttons */
+.scan-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.scan-action-btn {
+    flex: 1;
+    padding: 13px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.scan-action-btn.primary {
+    background: var(--clr-primary-700);
+    color: white;
+}
+
+.scan-action-btn.primary:hover {
+    background: var(--clr-primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.scan-action-btn.secondary {
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text);
+}
+
+.scan-action-btn.secondary:hover {
+    background: var(--clr-border-light);
+}
+
+/* ---- Step 4: Personalize / AI analyse ---- */
+.scan-ai-analyse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0;
+    text-align: center;
+}
+
+.scan-ai-brain {
+    font-size: 64px;
+    animation: aiPulse 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(82, 183, 136, 0.6));
+}
+
+@keyframes aiPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(82, 183, 136, 0.4));
+    }
+
+    50% {
+        transform: scale(1.12);
+        filter: drop-shadow(0 0 24px rgba(82, 183, 136, 0.9));
+    }
+}
+
+.scan-ai-text {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.scan-ai-sub {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    max-width: 320px;
+}
+
+.scan-ai-progress {
+    width: 100%;
+}
+
+.scan-ai-progress-bar-wrap {
+    height: 6px;
+    background: var(--clr-bg);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.scan-ai-progress-bar {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #1a472a, #52b788, #a7c957);
+    background-size: 200% 100%;
+    animation: progressSlide 1.5s ease infinite;
+}
+
+@keyframes progressSlide {
+    0% {
+        background-position: -100% 0;
+        width: 25%;
+    }
+
+    50% {
+        background-position: 0% 0;
+        width: 70%;
+    }
+
+    100% {
+        background-position: 100% 0;
+        width: 95%;
+    }
+}
+
+.scan-ai-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+}
+
+.scan-ai-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.scan-ai-step:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.scan-ai-step:nth-child(2) {
+    animation-delay: 0.9s;
+}
+
+.scan-ai-step:nth-child(3) {
+    animation-delay: 1.6s;
+}
+
+.scan-ai-step-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--clr-primary-400);
+    flex-shrink: 0;
+}
+
+/* ---- Step 5: Creative ideas result ---- */
+.scan-creative-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.scan-creative-header h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.scan-creative-header p {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+}
+
+.scan-creative-img-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid var(--clr-primary-200);
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.scan-creative-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.scan-creative-img-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--clr-primary-700);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+}
+
+.scan-creative-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.scan-creative-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: var(--clr-primary-50);
+    color: var(--clr-primary-700);
+    border: 1px solid var(--clr-primary-100);
+}

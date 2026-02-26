@@ -149,3 +149,128 @@ export const faqData = [
         a: 'All sellers undergo a verification process including material source documentation, quality samples, and sustainability certification review. Verified sellers receive a badge on their products.',
     },
 ];
+
+// ============================================
+// COLLECTION DRIVES DATA
+// ============================================
+export const collectionDrives = [
+    {
+        id: 1,
+        name: 'IIT Delhi Green Sprint',
+        location: 'IIT Delhi Main Campus',
+        city: 'New Delhi',
+        address: 'Hauz Khas, New Delhi 110016',
+        dateStart: '2026-03-05',
+        dateEnd: '2026-03-25',
+        status: 'upcoming',
+        capacity: 500,
+        registered: 312,
+        plasticTypes: ['PET', 'HDPE'],
+        expectedKg: 2000,
+        icon: '🏫',
+        description: 'A 3-week recycling sprint at IIT Delhi. Drop off pre-sorted PET and HDPE at the central smart bin near the Main Gate.',
+    },
+    {
+        id: 2,
+        name: 'Cyber Hub Clean Drive',
+        location: 'DLF Cyber Hub',
+        city: 'Gurugram',
+        address: 'DLF Cyber City, Gurugram 122002',
+        dateStart: '2026-02-20',
+        dateEnd: '2026-03-12',
+        status: 'active',
+        capacity: 300,
+        registered: 287,
+        plasticTypes: ['PET', 'HDPE', 'LDPE'],
+        expectedKg: 1500,
+        icon: '🏢',
+        description: 'Active now! Bring your sorted plastic to the collection point at DLF Cyber Hub food court entrance.',
+    },
+    {
+        id: 3,
+        name: 'DTU Youth Fest Recycle',
+        location: 'Delhi Technological University',
+        city: 'New Delhi',
+        address: 'Shahbad Daulatpur, Delhi 110042',
+        dateStart: '2026-03-15',
+        dateEnd: '2026-04-05',
+        status: 'upcoming',
+        capacity: 800,
+        registered: 145,
+        plasticTypes: ['PET', 'HDPE', 'PP'],
+        expectedKg: 3500,
+        icon: '🎪',
+        description: 'Combined with DTU annual fest! Massive collection drive with festival vibes, music, and rewards.',
+    },
+    {
+        id: 4,
+        name: 'Connaught Place Community',
+        location: 'CP Block A Central Park',
+        city: 'New Delhi',
+        address: 'Connaught Place, New Delhi 110001',
+        dateStart: '2026-02-01',
+        dateEnd: '2026-02-20',
+        status: 'completed',
+        capacity: 200,
+        registered: 198,
+        plasticTypes: ['PET', 'HDPE'],
+        expectedKg: 800,
+        collectedKg: 742,
+        icon: '🏛️',
+        description: 'Completed! 742 kg collected from 198 participants. Thank you CP community!',
+    },
+    {
+        id: 5,
+        name: 'Noida Sector 62 Tech Park',
+        location: 'HCL Tech Park',
+        city: 'Noida',
+        address: 'Sector 62, Noida 201301',
+        dateStart: '2026-03-10',
+        dateEnd: '2026-03-30',
+        status: 'upcoming',
+        capacity: 400,
+        registered: 89,
+        plasticTypes: ['PET', 'HDPE', 'PP'],
+        expectedKg: 1800,
+        icon: '💻',
+        description: 'Tech park sprint. Corporate-backed drive with bonus Up-Coins for IT professionals.',
+    },
+];
+
+export const userRegisteredDrives = [2, 3]; // IDs of drives user has joined
+
+// ============================================
+// AI SCAN DATA
+// ============================================
+export const recentScans = [
+    { id: 1, type: 'PET (Type 1)', item: 'Water Bottle', weight: '0.35 kg', coins: 25, time: '2 hours ago', confidence: 97 },
+    { id: 2, type: 'HDPE (Type 2)', item: 'Milk Jug', weight: '0.50 kg', coins: 40, time: '1 day ago', confidence: 94 },
+    { id: 3, type: 'PET (Type 1)', item: 'Soda Bottle', weight: '0.28 kg', coins: 20, time: '2 days ago', confidence: 98 },
+    { id: 4, type: 'PP (Type 5)', item: 'Yogurt Container', weight: '0.15 kg', coins: 12, time: '3 days ago', confidence: 91 },
+    { id: 5, type: 'HDPE (Type 2)', item: 'Detergent Bottle', weight: '0.85 kg', coins: 65, time: '5 days ago', confidence: 96 },
+];
+
+export const plasticTypeGuide = [
+    { code: '1', name: 'PET', full: 'Polyethylene Terephthalate', examples: 'Water bottles, soda bottles, food containers', rate: '70 coins/kg', color: '#2d6a4f' },
+    { code: '2', name: 'HDPE', full: 'High-Density Polyethylene', examples: 'Milk jugs, detergent bottles, pipes', rate: '85 coins/kg', color: '#1a472a' },
+    { code: '4', name: 'LDPE', full: 'Low-Density Polyethylene', examples: 'Plastic bags, squeeze bottles, wraps', rate: '50 coins/kg', color: '#40916c' },
+    { code: '5', name: 'PP', full: 'Polypropylene', examples: 'Yogurt cups, bottle caps, straws', rate: '60 coins/kg', color: '#52b788' },
+];
+
+// ============================================
+// USER IMPACT STATS (for home dashboard)
+// ============================================
+export const userImpactStats = {
+    plasticContributed: '12.4',
+    co2Saved: '24.8',
+    treesEquivalent: 3,
+    drivesJoined: 5,
+    totalScans: 47,
+};
+
+export const howItWorksSteps = [
+    { step: 1, icon: '📍', title: 'Find a Drive', desc: 'Locate a Recycling Sprint near you — campuses, tech parks, or community hubs' },
+    { step: 2, icon: '🚶', title: 'Drop Off Plastic', desc: 'Bring pre-sorted PET & HDPE to the central smart bin at the drive location' },
+    { step: 3, icon: '📸', title: 'Snap & Classify', desc: 'Take a photo — our AI instantly identifies plastic type and estimates weight' },
+    { step: 4, icon: '🪙', title: 'Earn & Spend', desc: 'Get Up-Coins in your wallet. Cash out or unlock 30-50% discounts on eco-products' },
+];

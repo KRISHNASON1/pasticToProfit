@@ -1,0 +1,274 @@
+/* ============================
+   SOLUTIONS PAGE
+   ============================ */
+.solutions-page {
+    padding: 24px 28px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* ── Scroll reveal ── */
+.sol-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease var(--sol-delay, 0s),
+        transform 0.6s ease var(--sol-delay, 0s);
+}
+
+.sol-reveal.sol-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.sol-hero {
+    text-align: center;
+    padding: 48px 24px 36px;
+    background: linear-gradient(135deg, var(--clr-primary-900) 0%, var(--clr-primary-700) 55%, var(--clr-primary-500) 100%);
+    border-radius: var(--radius-xl);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.sol-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(82, 183, 136, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 201, 87, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.sol-hero-icon-wrap {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-primary-100);
+    animation: float 4s ease infinite;
+}
+
+.sol-hero-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+}
+
+.sol-hero-highlight {
+    background: linear-gradient(90deg, var(--clr-accent-light), var(--clr-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sol-hero-sub {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ============================================
+   SOLUTION CARDS — 2×2 Grid
+   ============================================ */
+.sol-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.sol-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border-light);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.sol-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-xl);
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: border-color var(--transition-base),
+        box-shadow var(--transition-base);
+}
+
+.sol-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.sol-card:hover::after {
+    border-color: var(--card-accent, var(--clr-primary-300));
+    box-shadow: 0 0 24px rgba(82, 183, 136, 0.18);
+}
+
+.sol-card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--clr-primary-500);
+    background: var(--clr-primary-50);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    align-self: flex-start;
+}
+
+.sol-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--clr-primary-700), var(--clr-primary-500));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 4px 0;
+    flex-shrink: 0;
+}
+
+.sol-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--clr-text);
+}
+
+.sol-card-desc {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--clr-text-secondary);
+    flex: 1;
+}
+
+.sol-card-cta {
+    align-self: flex-start;
+    margin-top: 6px;
+    padding: 9px 20px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--clr-primary-600);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1.5px solid var(--clr-border);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.sol-card-cta:hover {
+    background: var(--clr-primary-700);
+    color: white;
+    border-color: var(--clr-primary-700);
+}
+
+/* ============================================
+   TRUST BAR
+   ============================================ */
+.sol-trust {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    background: linear-gradient(135deg, var(--clr-primary-900) 0%, var(--clr-primary-700) 100%);
+    border-radius: var(--radius-xl);
+    padding: 28px 20px;
+}
+
+.sol-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.sol-trust-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-primary-100);
+    margin-bottom: 4px;
+}
+
+.sol-trust-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+}
+
+.sol-trust-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+    max-width: 200px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .sol-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .solutions-page {
+        padding: 16px 14px 28px;
+        gap: 24px;
+    }
+
+    .sol-hero {
+        padding: 32px 16px 28px;
+    }
+
+    .sol-hero-title {
+        font-size: 24px;
+    }
+
+    .sol-hero-sub {
+        font-size: 13.5px;
+    }
+
+    .sol-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .sol-trust {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 16px;
+    }
+
+    .sol-trust-value {
+        font-size: 20px;
+    }
+}

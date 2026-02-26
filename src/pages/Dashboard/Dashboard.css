@@ -17,7 +17,6 @@
 }
 
 .db-topbar-left h1 {
-    font-family: var(--font-display);
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 2px;
@@ -115,7 +114,6 @@
 }
 
 .db-card-value {
-    font-family: var(--font-display);
     font-size: 30px;
     font-weight: 800;
     line-height: 1;
@@ -217,7 +215,6 @@
 }
 
 .db-card-stats-label {
-    font-family: var(--font-display);
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 14px;
@@ -287,7 +284,6 @@
 }
 
 .db-map-header-left h3 {
-    font-family: var(--font-display);
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 2px;
@@ -441,7 +437,6 @@
 }
 
 .db-reco-header h3 {
-    font-family: var(--font-display);
     font-size: 15px;
     font-weight: 700;
     display: flex;

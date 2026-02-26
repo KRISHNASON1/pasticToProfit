@@ -26,12 +26,12 @@ export default function Sidebar() {
                 <UpcycleLogo size={28} theme="light" />
             </div>
 
-            {/* Marketplace dropdown */}
-            <div className="sidebar-dropdown">
+            {/* Marketplace link */}
+            <NavLink to="/marketplace" className={({ isActive }) => `sidebar-dropdown ${isActive ? 'active' : ''}`} style={{ textDecoration: 'none' }}>
                 <span className="sidebar-dropdown-icon">🛍️</span>
                 <span>Marketplace</span>
-                <span className="sidebar-dropdown-chevron">▾</span>
-            </div>
+                <span className="sidebar-dropdown-chevron">→</span>
+            </NavLink>
 
             {/* Search */}
             <div className="sidebar-search">

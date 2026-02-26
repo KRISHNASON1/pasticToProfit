@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -11,6 +12,7 @@ import Login from './pages/Login/Login';
 import Solutions from './pages/Solutions/Solutions';
 import EPR from './pages/EPR/EPR';
 import PublicNavbar from './components/PublicNavbar/PublicNavbar';
+import LandingPage from './pages/LandingPage/LandingPage';
 import './App.css';
 
 function SplashScreen({ onFinish }) {
@@ -80,21 +82,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <div className="app-layout">
-          <Sidebar />
-          <main className="main-content">
-            <div className="main-inner">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/marketplace" element={<Marketplace />} />
-                <Route path="/rewards" element={<Rewards />} />
-                <Route path="/support" element={<Support />} />
-                <Route path="/settings" element={<Settings />} />
-              </Routes>
-            </div>
-          </main>
-          <Cart />
-        </div>
+        <Routes>
+          {/* Public landing page — with navbar, no sidebar */}
+          <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+
+          {/* Public pages with navbar only */}
+          <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+          <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
+          <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
+
+          {/* Marketplace — navbar + cart, no sidebar */}
+          <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
+
+          {/* Internal app pages — sidebar + cart */}
+          <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
+          <Route path="/rewards" element={<AppLayout><Rewards /></AppLayout>} />
+          <Route path="/support" element={<AppLayout><Support /></AppLayout>} />
+          <Route path="/settings" element={<AppLayout><Settings /></AppLayout>} />
+        </Routes>
       </CartProvider>
     </BrowserRouter>
   );

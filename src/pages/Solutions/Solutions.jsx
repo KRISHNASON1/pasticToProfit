@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import {
     Recycle,
     Home,
-    Palette,
+    Store,
     Building2,
     Landmark,
     TrendingUp,
@@ -22,10 +22,10 @@ const solutionCards = [
         accent: 'var(--clr-primary-300)',
     },
     {
-        icon: Palette,
-        title: 'Premium Raw Material, Delivered to Your Studio',
+        icon: Store,
+        title: 'Sell Your Recycled Products Here',
         description:
-            'Get clean, sorted, certified recycled plastic — PET, HDPE, mixed — ready to transform into high-value products. Sell on our marketplace.',
+            'List your upcycled creations directly on our marketplace. Reach conscious buyers, earn verified income, and turn your craft into a sustainable business.',
         cta: 'Join as a Creator →',
         accent: 'var(--clr-accent)',
     },

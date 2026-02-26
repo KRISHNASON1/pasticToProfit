@@ -1,0 +1,115 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    height: var(--header-height);
+    background: var(--clr-surface);
+    border-bottom: 1px solid var(--clr-border-light);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.header-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.header-tab {
+    padding: 8px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--clr-text-secondary);
+    border-radius: var(--radius-full);
+    background: transparent;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.header-tab:hover {
+    background: var(--clr-bg-alt);
+    color: var(--clr-text);
+}
+
+.header-tab.active {
+    background: var(--clr-primary-700);
+    color: white;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-full);
+    padding: 8px 16px;
+    min-width: 180px;
+    transition: border-color var(--transition-fast);
+}
+
+.header-search:focus-within {
+    border-color: var(--clr-primary-300);
+}
+
+.header-search-icon {
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.header-search input {
+    background: transparent;
+    width: 100%;
+    font-size: 13px;
+    color: var(--clr-text);
+}
+
+.header-search input::placeholder {
+    color: var(--clr-text-muted);
+}
+
+.header-cart {
+    position: relative;
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.header-cart:hover {
+    background: var(--clr-primary-50);
+    border-color: var(--clr-primary-200);
+}
+
+.header-cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: var(--clr-danger);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--clr-surface);
+}

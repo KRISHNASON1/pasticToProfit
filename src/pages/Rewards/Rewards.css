@@ -1,9 +1,6 @@
 .rewards-page {
     padding: 24px 28px;
     animation: fadeIn 0.4s ease;
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
 }
 
 /* Cash Out Modal */

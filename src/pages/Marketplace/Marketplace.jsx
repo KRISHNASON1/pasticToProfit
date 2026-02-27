@@ -81,7 +81,7 @@ export default function Marketplace() {
             {/* Header */}
             <header className="mp-header">
                 <div className="mp-header-left">
-                    <button className="mp-back-btn" onClick={() => navigate('/')} title="Back">
+                    <button className="mp-back-btn" onClick={() => navigate(-1)} title="Back">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
                     </button>
                     <div className="mp-logo" onClick={() => setActiveCategory('all')}>

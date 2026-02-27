@@ -1,21 +1,24 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { products, categories, getProductsByCategory, getNewArrivals, getSaleProducts } from '../../data/products';
+import { categories } from '../../data/products';
 import './Marketplace.css';
 
 // Star display
 function renderStars(rating) {
-    const full = Math.floor(rating);
-    const half = rating - full >= 0.5;
+    const full = Math.floor(rating || 0);
+    const half = (rating || 0) - full >= 0.5;
     let stars = '★'.repeat(full);
     if (half) stars += '½';
-    stars += '☆'.repeat(5 - full - (half ? 1 : 0));
+    stars += '☆'.repeat(Math.max(0, 5 - full - (half ? 1 : 0)));
     return stars;
 }
 
 export default function Marketplace() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const [activeCategory, setActiveCategory] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
     const [searchQuery, setSearchQuery] = useState('');
@@ -24,6 +27,19 @@ export default function Marketplace() {
     const { addItem, totalItems, setIsOpen } = useCart();
     const { user } = useAuth();
     const isDiscountMode = searchParams.get('discount') === 'true';
+
+    useEffect(() => {
+        fetch('/api/products')
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data.products || []);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Failed to fetch products:', err);
+                setLoading(false);
+            });
+    }, []);
 
     // Apply discounts: 20% off all, extra 30% off luxury
     const applyDiscount = (product) => {
@@ -41,27 +57,29 @@ export default function Marketplace() {
     };
 
     const filteredProducts = useMemo(() => {
-        let result;
-        switch (activeCategory) {
-            case 'sale': result = getSaleProducts(); break;
-            case 'all': result = [...products]; break;
-            default: result = getProductsByCategory(activeCategory);
+        if (!products.length) return [];
+        let result = [...products];
+
+        if (activeCategory === 'sale') {
+            result = result.filter(p => p.onSale);
+        } else if (activeCategory !== 'all') {
+            result = result.filter(p => p.category === activeCategory);
         }
 
         if (searchQuery.trim()) {
             const q = searchQuery.toLowerCase();
             result = result.filter(p =>
                 p.name.toLowerCase().includes(q) ||
-                p.description.toLowerCase().includes(q) ||
-                p.badge?.toLowerCase().includes(q)
+                (p.description && p.description.toLowerCase().includes(q)) ||
+                (p.badge && p.badge.toLowerCase().includes(q))
             );
         }
 
         switch (sortBy) {
             case 'price-low': result.sort((a, b) => a.price - b.price); break;
             case 'price-high': result.sort((a, b) => b.price - a.price); break;
-            case 'rating': result.sort((a, b) => b.rating - a.rating); break;
-            case 'newest': result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)); break;
+            case 'rating': result.sort((a, b) => (b.rating || 0) - (a.rating || 0)); break;
+            case 'newest': result.sort((a, b) => (b.isNewProduct ? 1 : 0) - (a.isNewProduct ? 1 : 0)); break;
             default: break;
         }
 
@@ -71,10 +89,14 @@ export default function Marketplace() {
         }
 
         return result;
-    }, [activeCategory, sortBy, searchQuery, isDiscountMode]);
+    }, [products, activeCategory, sortBy, searchQuery, isDiscountMode]);
 
-    const newArrivals = getNewArrivals().slice(0, 8);
-    const showcaseProducts = products.filter(p => p.isNew).slice(0, 4);
+    const newArrivals = products.filter(p => p.isNewProduct).slice(0, 8);
+    const showcaseProducts = products.filter(p => p.isNewProduct).slice(0, 4);
+
+    if (loading) {
+        return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: 20 }}>Loading Store...</div>;
+    }
 
     return (
         <div className="marketplace">

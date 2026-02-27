@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getNewArrivals, getSaleProducts } from '../../data/products';
 import { rewardsData, userImpactStats } from '../../data/stats';
 import ScanModal from '../../components/ScanModal/ScanModal';
 import {
@@ -9,11 +8,6 @@ import {
     MapPin, ScanLine, Package, Star, Download, Trophy, Truck, X
 } from 'lucide-react';
 import './Dashboard.css';
-
-const recoProducts = [
-    ...getNewArrivals().slice(0, 3),
-    ...getSaleProducts().slice(0, 2),
-];
 
 const houseLocations = [
     { x: '20%', y: '35%', name: 'Your Home', color: '#a7c957', isHome: true },
@@ -24,13 +18,6 @@ const houseLocations = [
 ];
 
 const agentPos = { x: '48%', y: '45%' };
-
-const miniStats = [
-    { Icon: Recycle, label: 'Plastic Contributed', val: `${userImpactStats.plasticContributed} kg`, pct: 62 },
-    { Icon: Leaf, label: 'CO₂ Saved', val: `${userImpactStats.co2Saved} kg`, pct: 49 },
-    { Icon: MapPin, label: 'Drives Joined', val: userImpactStats.drivesJoined, pct: 50 },
-    { Icon: ScanLine, label: 'Items Scanned', val: userImpactStats.totalScans, pct: 78 },
-];
 
 const recentNotifications = [
     { id: 1, text: 'Campus drive completed at IIT Delhi — 450 kg collected', time: '2h ago' },
@@ -62,6 +49,26 @@ export default function Dashboard() {
     const userBalance = user?.upCoins ?? balance;
     const userTier = user?.tier || tier;
     const bag = user?.bag || [];
+
+    const miniStats = [
+        { Icon: Recycle, label: 'Plastic Contributed', val: `${user?.plasticContributed || 0} kg`, pct: 62 },
+        { Icon: Leaf, label: 'CO₂ Saved', val: `${user?.co2Saved || 0} kg`, pct: 49 },
+        { Icon: MapPin, label: 'Drives Joined', val: user?.drivesJoined || 0, pct: 50 },
+        { Icon: ScanLine, label: 'Items Scanned', val: user?.totalScans || 0, pct: 78 },
+    ];
+    const [recoProducts, setRecoProducts] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/products')
+            .then(res => res.json())
+            .then(data => {
+                const prods = data.products || [];
+                const newItems = prods.filter(p => p.isNewProduct).slice(0, 3);
+                const saleItems = prods.filter(p => p.onSale && !p.isNewProduct).slice(0, 2);
+                setRecoProducts([...newItems, ...saleItems]);
+            })
+            .catch(console.error);
+    }, []);
 
     // Close notification dropdown on outside click
     useEffect(() => {

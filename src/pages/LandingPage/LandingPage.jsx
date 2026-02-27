@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Recycle, ShoppingCart, Palette, RefreshCw, Building2, Coins, BookOpen, Handshake, Users, Factory, Store, ScanSearch, TrendingUp, Gem, Link2, Package, Brain, Sparkles, CalendarCheck, Megaphone, Truck, Smartphone, BarChart3, School, Globe2, Laptop, Target, Check } from 'lucide-react';
 import { UpcycleLogo } from '../../components/Logo/UpcycleLogo';
-import { products } from '../../data/products';
 import './LandingPage.css';
 
 /* ─── Animated counter hook ─── */
@@ -144,9 +143,20 @@ export default function LandingPage() {
   const winCardRef = useMultiReveal(3);
 
   // Top products for teaser
-  const featuredProducts = products.filter(p =>
-    ['luxury', 'handmade', 'diy', 'fashion'].includes(p.category)
-  ).slice(0, 4);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        const prods = data.products || [];
+        const featured = prods.filter(p =>
+          p.name.includes('Watch') || p.name.includes('Vase') || p.name.includes('Tray') || p.name.includes('Frame')
+        ).slice(0, 4);
+        setFeaturedProducts(featured);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="landing-page">

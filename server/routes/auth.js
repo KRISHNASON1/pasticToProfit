@@ -229,4 +229,21 @@ router.post('/cashout', auth, async (req, res) => {
     }
 });
 
+// ── SYNC CART ─────────────────────────────
+router.post('/cart', auth, async (req, res) => {
+    try {
+        const { cart } = req.body;
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        user.cart = cart || [];
+        await user.save();
+
+        res.json({ cart: user.cart });
+    } catch (err) {
+        console.error('Cart sync error:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 export default router;

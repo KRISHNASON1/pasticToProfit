@@ -26,12 +26,13 @@ const userSchema = new mongoose.Schema({
     upiId: { type: String, default: '' },
     upCoins: { type: Number, default: 500 },
     tier: { type: String, default: 'Bronze' },
-    plasticContributed: { type: Number, default: 0 },
-    co2Saved: { type: Number, default: 0 },
-    drivesJoined: { type: Number, default: 0 },
-    totalScans: { type: Number, default: 0 },
+    plasticContributed: { type: Number, default: 12.4 },
+    co2Saved: { type: Number, default: 24.8 },
+    drivesJoined: { type: Number, default: 3 },
+    totalScans: { type: Number, default: 15 },
     bag: [bagItemSchema],
     transactions: [transactionSchema],
+    cart: { type: Array, default: [] },
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

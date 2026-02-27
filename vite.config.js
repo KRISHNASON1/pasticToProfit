@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 5173,
-    allowedHosts: ['upcycle.onrender.com'],
+    allowedHosts: ['upcycle-z48a.onrender.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:5001',

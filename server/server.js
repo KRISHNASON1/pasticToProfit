@@ -26,11 +26,18 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 mongoose.connect(MONGO_URI)
     .then(() => {
         console.log('✅ Connected to MongoDB:', MONGO_URI);
-        app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
-        });
+        if (!process.env.VERCEL) {
+            app.listen(PORT, () => {
+                console.log(`🚀 Server running on http://localhost:${PORT}`);
+            });
+        }
     })
     .catch(err => {
         console.error('❌ MongoDB connection error:', err.message);
-        process.exit(1);
+        if (!process.env.VERCEL) {
+            process.exit(1);
+        }
     });
+
+// Export the app for Vercel serverless deployment
+export default app;

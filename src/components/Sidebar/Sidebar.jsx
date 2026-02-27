@@ -5,8 +5,8 @@ import {
     Coins,
     MessageCircle,
     Settings,
-    Recycle,
-    Search
+    Search,
+    Store
 } from 'lucide-react';
 import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import { useAuth } from '../../context/AuthContext';
@@ -14,6 +14,7 @@ import './Sidebar.css';
 
 const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
+    { to: '/marketplace', icon: Store, label: 'Marketplace' },
     { to: '/rewards', icon: Coins, label: 'Rewards' },
     { to: '/support', icon: MessageCircle, label: 'Support' },
     { to: '/settings', icon: Settings, label: 'Settings' },
@@ -22,10 +23,9 @@ const navItems = [
 export default function Sidebar() {
     const { user } = useAuth();
 
-    // Get initials from user name
     const initials = user?.name
         ? user.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
-        : '👤';
+        : '??';
 
     return (
         <aside className="sidebar">
@@ -33,13 +33,6 @@ export default function Sidebar() {
             <div className="sidebar-logo">
                 <UpcycleLogo size={28} theme="light" />
             </div>
-
-            {/* Marketplace link */}
-            <NavLink to="/marketplace" className={({ isActive }) => `sidebar-dropdown ${isActive ? 'active' : ''}`} style={{ textDecoration: 'none' }}>
-                <span className="sidebar-dropdown-icon">🛍️</span>
-                <span>Marketplace</span>
-                <span className="sidebar-dropdown-chevron">→</span>
-            </NavLink>
 
             {/* Search */}
             <div className="sidebar-search">

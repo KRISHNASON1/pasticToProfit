@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import { products, categories, getProductsByCategory, getNewArrivals, getSaleProducts } from '../../data/products';
 import './Marketplace.css';
 
@@ -19,7 +20,25 @@ export default function Marketplace() {
     const [sortBy, setSortBy] = useState('featured');
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { addItem, totalItems, setIsOpen } = useCart();
+    const { user } = useAuth();
+    const isDiscountMode = searchParams.get('discount') === 'true';
+
+    // Apply discounts: 20% off all, extra 30% off luxury
+    const applyDiscount = (product) => {
+        if (!isDiscountMode) return product;
+        const baseDiscount = 0.20;
+        const luxuryDiscount = product.category === 'luxury' ? 0.30 : 0;
+        const totalDiscount = baseDiscount + luxuryDiscount;
+        return {
+            ...product,
+            originalPrice: product.originalPrice || product.price,
+            price: Math.round(product.price * (1 - totalDiscount) * 100) / 100,
+            onSale: true,
+            _discountApplied: true,
+        };
+    };
 
     const filteredProducts = useMemo(() => {
         let result;
@@ -46,8 +65,13 @@ export default function Marketplace() {
             default: break;
         }
 
+        // Apply discounts if in discount mode
+        if (isDiscountMode) {
+            result = result.map(applyDiscount);
+        }
+
         return result;
-    }, [activeCategory, sortBy, searchQuery]);
+    }, [activeCategory, sortBy, searchQuery, isDiscountMode]);
 
     const newArrivals = getNewArrivals().slice(0, 8);
     const showcaseProducts = products.filter(p => p.isNew).slice(0, 4);
@@ -108,11 +132,23 @@ export default function Marketplace() {
 
             {/* Promo Ticker */}
             <div className="mp-promo-ticker">
-                <span className="mp-ticker-item">Free shipping on orders over $50</span>
-                <span className="mp-ticker-sep">|</span>
-                <span className="mp-ticker-item">Earn Up-Coins on every purchase</span>
-                <span className="mp-ticker-sep">|</span>
-                <span className="mp-ticker-item">100% Recycled Packaging</span>
+                {isDiscountMode ? (
+                    <>
+                        <span className="mp-ticker-item" style={{ color: '#22c55e', fontWeight: 700 }}>Up-Coins Discount Active: 20% off all products!</span>
+                        <span className="mp-ticker-sep">|</span>
+                        <span className="mp-ticker-item" style={{ color: '#22c55e', fontWeight: 700 }}>Extra 30% off Luxury items!</span>
+                        <span className="mp-ticker-sep">|</span>
+                        <span className="mp-ticker-item">Your Balance: {user?.upCoins ?? 0} Up-Coins</span>
+                    </>
+                ) : (
+                    <>
+                        <span className="mp-ticker-item">Free shipping on orders over ₹500</span>
+                        <span className="mp-ticker-sep">|</span>
+                        <span className="mp-ticker-item">Earn Up-Coins on every purchase</span>
+                        <span className="mp-ticker-sep">|</span>
+                        <span className="mp-ticker-item">100% Recycled Packaging</span>
+                    </>
+                )}
             </div>
 
             {/* Hero */}
@@ -143,7 +179,7 @@ export default function Marketplace() {
                                 <div key={p.id} className="mp-hero-showcase-card">
                                     <img src={p.image} alt={p.name} className="mp-hero-showcase-img" />
                                     <span className="mp-hero-showcase-name">{p.name}</span>
-                                    <span className="mp-hero-showcase-price">${p.price.toFixed(2)}</span>
+                                    <span className="mp-hero-showcase-price">₹{p.price.toFixed(2)}</span>
                                 </div>
                             ))}
                         </div>
@@ -281,7 +317,7 @@ export default function Marketplace() {
                 <div className="mp-trust-bar">
                     <div className="mp-trust-item">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
-                        <div className="mp-trust-info"><h4>Free Delivery</h4><p>On orders above $50</p></div>
+                        <div className="mp-trust-info"><h4>Free Delivery</h4><p>On orders above ₹500</p></div>
                     </div>
                     <div className="mp-trust-item">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" /></svg>
@@ -387,10 +423,10 @@ function ProductCard({ product, onAddToCart }) {
                     <span className="mp-card-review-count">({product.reviews})</span>
                 </div>
                 <div className="mp-card-price-row">
-                    <span className="mp-card-price">${product.price.toFixed(2)}</span>
+                    <span className="mp-card-price">₹{product.price.toFixed(2)}</span>
                     {product.originalPrice && product.originalPrice !== product.price && (
                         <>
-                            <span className="mp-card-original-price">${product.originalPrice.toFixed(2)}</span>
+                            <span className="mp-card-original-price">₹{product.originalPrice.toFixed(2)}</span>
                             {discount > 0 && <span className="mp-card-discount">-{discount}%</span>}
                         </>
                     )}

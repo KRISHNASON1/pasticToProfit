@@ -170,9 +170,9 @@ export default function LandingPage() {
                   <span>→</span>
                 </button>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/earn">
                 <button className="lp-btn-secondary">
-                  🎟️ UpCycle & Earn
+                  UpCycle & Earn
                 </button>
               </Link>
             </div>

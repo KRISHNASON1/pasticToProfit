@@ -12,6 +12,7 @@ import Login from './pages/Login/Login';
 import Solutions from './pages/Solutions/Solutions';
 import EPR from './pages/EPR/EPR';
 import DIY from './pages/DIY/DIY';
+import Earn from './pages/Earn/Earn';
 import PublicNavbar from './components/PublicNavbar/PublicNavbar';
 import PublicLayout from './components/PublicLayout';
 import LandingPage from './pages/LandingPage/LandingPage';
@@ -80,6 +81,7 @@ export default function App() {
           {/* Public landing page — with navbar, no sidebar */}
           <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
           <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
+          <Route path="/earn" element={<PublicLayout><Earn /></PublicLayout>} />
           <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
           <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
           <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />

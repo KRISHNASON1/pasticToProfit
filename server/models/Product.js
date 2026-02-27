@@ -14,6 +14,9 @@ const productSchema = new mongoose.Schema({
     onSale: { type: Boolean, default: false },
     isNewProduct: { type: Boolean, default: false },
     upCoins: { type: Number, default: 0 },
+    creatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    story: { type: String },
+    images: { type: [String], default: [] },
 });
 
 export default mongoose.model('Product', productSchema);

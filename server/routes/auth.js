@@ -1,26 +1,13 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import auth from '../middleware/auth.js';
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'plasticToProfit_secret_key_2026';
 
 function makeToken(user) {
     return jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '30d' });
-}
-
-function auth(req, res, next) {
-    const header = req.headers.authorization;
-    if (!header || !header.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'Not authenticated' });
-    }
-    try {
-        const decoded = jwt.verify(header.split(' ')[1], JWT_SECRET);
-        req.userId = decoded.id;
-        next();
-    } catch {
-        return res.status(401).json({ error: 'Invalid token' });
-    }
 }
 
 // ── SIGN UP ────────────────────────────────────────────

@@ -453,6 +453,20 @@ function ProductCard({ product, onAddToCart }) {
                         </>
                     )}
                 </div>
+                {product.story && (
+                    <div className="mp-card-story">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" style={{ marginRight: 4, flexShrink: 0, marginTop: 2 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <span className="mp-card-story-text">"{product.story.substring(0, 60)}{product.story.length > 60 ? '...' : ''}"</span>
+                    </div>
+                )}
+                {product.images && product.images.length > 1 && (
+                    <div className="mp-card-gallery-preview">
+                        {product.images.slice(1, 4).map((img, i) => (
+                            <div key={i} className="mp-card-gallery-thumb" style={{ backgroundImage: `url(${img})` }}></div>
+                        ))}
+                        {product.images.length > 4 && <div className="mp-card-gallery-more">+{product.images.length - 4}</div>}
+                    </div>
+                )}
                 <div className="mp-card-coins">Earn {product.upCoins} Up-Coins</div>
             </div>
         </div>

@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Users, Package, Store, BookOpen, Coins, UserPlus, Scissors, Clock, Plus, Minus, Sprout, Hammer, Award, Crown, ScanLine, Truck, ShieldCheck, Check } from 'lucide-react';
 import beforeImg from '../../assets/images/diy/diy-before-bottle.png';
 import afterImg from '../../assets/images/diy/diy-after-planter.jpg';
 import './DIY.css';
+import MakerModal from '../../components/MakerModal/MakerModal';
+import { useAuth } from '../../context/AuthContext';
 
 export default function DIY() {
+    const navigate = useNavigate();
+    const { user } = useAuth();
+    const [isMakerModalOpen, setIsMakerModalOpen] = useState(false);
     // Intersection Observer for fade-in animations
     const observerRef = useRef(null);
 
@@ -53,8 +58,47 @@ export default function DIY() {
         );
     };
 
+    const handleStartCreating = () => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            setIsMakerModalOpen(true);
+        }
+    };
+
+    const handlePublishProduct = async (payload) => {
+        const token = localStorage.getItem('token');
+        if (!token) return navigate('/login');
+
+        try {
+            const res = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) throw new Error('Submission failed');
+            alert('Your creation is now live on the marketplace!');
+            setIsMakerModalOpen(false);
+            navigate('/marketplace');
+        } catch (err) {
+            console.error(err);
+            alert('Failed to publish product. Please try again.');
+        }
+    };
+
     return (
         <div className="diy-page">
+            {isMakerModalOpen && (
+                <MakerModal
+                    onClose={() => setIsMakerModalOpen(false)}
+                    onSubmit={handlePublishProduct}
+                />
+            )}
+
             {/* SECTION 1 — HERO */}
             <section className="diy-hero section-dark fade-up-element">
                 <div className="diy-container hero-grid">
@@ -65,7 +109,7 @@ export default function DIY() {
                             You don't need a factory. You don't need experience. All you need is an idea and some recovered plastic. We'll handle everything else — raw material, marketplace, and recognition.
                         </p>
                         <div className="hero-ctas">
-                            <button className="btn-primary">Start Creating</button>
+                            <button className="btn-primary" onClick={handleStartCreating}>Start Creating</button>
                             <button className="btn-outline-white">Browse Tutorials</button>
                         </div>
                         <div className="hero-stats">

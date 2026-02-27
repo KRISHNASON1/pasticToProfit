@@ -29,6 +29,7 @@ export default function PublicNavbar() {
                     <Link to="/#about-us">About Us</Link>
                 )}
                 <Link to="/marketplace">Marketplace</Link>
+                <Link to="/diy">DIY</Link>
                 <Link to="/epr">EPR</Link>
                 <Link to="/solutions">Solutions</Link>
                 <Link to="/dashboard" className="lp-nav-cta">My Dashboard</Link>

@@ -10,7 +10,9 @@ import Support from './pages/Support/Support';
 import Settings from './pages/Settings/Settings';
 import Solutions from './pages/Solutions/Solutions';
 import EPR from './pages/EPR/EPR';
+import DIY from './pages/DIY/DIY';
 import PublicNavbar from './components/PublicNavbar/PublicNavbar';
+import PublicLayout from './components/PublicLayout';
 import './App.css';
 
 /* App shell with sidebar + cart (the internal platform) */
@@ -28,15 +30,7 @@ function AppLayout({ children }) {
   );
 }
 
-/* Public wrapper with shared navbar */
-function PublicLayout({ children }) {
-  return (
-    <div className="public-layout">
-      <PublicNavbar />
-      {children}
-    </div>
-  );
-}
+
 
 /* Marketplace Layout — no sidebar, with Public Navbar and Cart */
 function MarketplaceLayout({ children }) {
@@ -60,6 +54,7 @@ export default function App() {
         <Routes>
           {/* Public pages — full-width with shared Navbar */}
           <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+          <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
           <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
           <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
 

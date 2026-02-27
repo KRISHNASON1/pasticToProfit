@@ -26,6 +26,13 @@ export default function Sidebar() {
                 <UpcycleLogo size={28} theme="light" />
             </div>
 
+            {/* Marketplace link */}
+            <NavLink to="/marketplace" className={({ isActive }) => `sidebar-dropdown ${isActive ? 'active' : ''}`} style={{ textDecoration: 'none' }}>
+                <span className="sidebar-dropdown-icon">🛍️</span>
+                <span>Marketplace</span>
+                <span className="sidebar-dropdown-chevron">→</span>
+            </NavLink>
+
             {/* Search */}
             <div className="sidebar-search">
                 <span className="sidebar-search-icon">
@@ -51,6 +58,9 @@ export default function Sidebar() {
                             <item.icon size={16} strokeWidth={2} />
                         </span>
                         <span>{item.label}</span>
+                        {item.badge && (
+                            <span className={`sidebar-nav-badge ${item.badgeColor}`}>{item.badge}</span>
+                        )}
                     </NavLink>
                 ))}
             </nav>
@@ -58,14 +68,14 @@ export default function Sidebar() {
             {/* User */}
             <div className="sidebar-user">
                 <div className="sidebar-user-label">User Account</div>
-                <div className="sidebar-user-card">
-                    <div className="sidebar-user-avatar">KS</div>
+                <NavLink to="/login" className="sidebar-user-card" style={{ textDecoration: 'none' }}>
+                    <div className="sidebar-user-avatar">👤</div>
                     <div className="sidebar-user-info">
-                        <div className="sidebar-user-name">Krishna Soni</div>
-                        <div className="sidebar-user-id">@krishna_eco · Gold 🏆</div>
+                        <div className="sidebar-user-name">Sign In</div>
+                        <div className="sidebar-user-id">Tap to get started</div>
                     </div>
-                    <span className="sidebar-user-more">⋮</span>
-                </div>
+                    <span className="sidebar-user-more">→</span>
+                </NavLink>
             </div>
         </aside>
     );

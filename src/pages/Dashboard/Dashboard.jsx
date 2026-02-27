@@ -356,7 +356,7 @@ export default function Dashboard() {
                         {recoProducts.map(p => (
                             <div key={p.id} className="db-reco-card">
                                 <div className="db-reco-img" style={{ background: p.gradient || 'var(--clr-bg)' }}>
-                                    {p.image}
+                                    <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 </div>
                                 <div className="db-reco-info">
                                     <div className="db-reco-badge">{p.badge}</div>

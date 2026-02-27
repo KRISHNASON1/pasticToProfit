@@ -54,13 +54,18 @@
 .lp-nav-links a {
     font-size: 14px;
     font-weight: 500;
-    color: var(--lp-graphite-600, #55556a);
+    color: white;
     text-decoration: none;
     transition: color 0.2s ease;
     letter-spacing: 0.01em;
 }
 
-.lp-nav-links a:hover {
+.lp-nav.scrolled .lp-nav-links a {
+    color: var(--lp-graphite-600, #55556a);
+}
+
+.lp-nav-links a:hover,
+.lp-nav.scrolled .lp-nav-links a:hover {
     color: var(--lp-emerald-600, #059669);
 }
 

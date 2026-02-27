@@ -155,10 +155,6 @@ export default function LandingPage() {
 
         <div className="lp-hero-inner">
           <div className="lp-hero-content">
-            <div className="lp-hero-tag">
-              <span className="lp-hero-tag-dot" />
-              The Circular Economy Platform
-            </div>
             <h1>
               From Single-Use<br />
               to <span>Heirloom.</span>
@@ -174,9 +170,9 @@ export default function LandingPage() {
                   <span>→</span>
                 </button>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/earn">
                 <button className="lp-btn-secondary">
-                  🎟️ Start Recycling — Trash to Tickets
+                  UpCycle & Earn
                 </button>
               </Link>
             </div>

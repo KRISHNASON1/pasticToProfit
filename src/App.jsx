@@ -12,7 +12,10 @@ import Settings from './pages/Settings/Settings';
 import Login from './pages/Login/Login';
 import Solutions from './pages/Solutions/Solutions';
 import EPR from './pages/EPR/EPR';
+import DIY from './pages/DIY/DIY';
+import Earn from './pages/Earn/Earn';
 import PublicNavbar from './components/PublicNavbar/PublicNavbar';
+import PublicLayout from './components/PublicLayout';
 import LandingPage from './pages/LandingPage/LandingPage';
 import './App.css';
 
@@ -54,15 +57,7 @@ function AppLayout({ children }) {
   );
 }
 
-/* Public wrapper with shared navbar */
-function PublicLayout({ children }) {
-  return (
-    <div className="public-layout">
-      <PublicNavbar />
-      {children}
-    </div>
-  );
-}
+
 
 /* Marketplace Layout — no sidebar, with Public Navbar and Cart */
 function MarketplaceLayout({ children }) {
@@ -90,6 +85,17 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
+<<<<<<< branch1
+      <CartProvider>
+        <Routes>
+          {/* Public landing page — with navbar, no sidebar */}
+          <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+          <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
+          <Route path="/earn" element={<PublicLayout><Earn /></PublicLayout>} />
+          <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+          <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
+          <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
+=======
       <AuthProvider>
         <CartProvider>
           <Routes>
@@ -100,6 +106,7 @@ export default function App() {
             <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
             <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
             <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
+>>>>>>> branch1
 
             {/* Marketplace — navbar + cart, no sidebar */}
             <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />

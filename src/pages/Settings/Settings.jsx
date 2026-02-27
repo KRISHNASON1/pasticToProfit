@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Header from '../../components/Header/Header';
 import './Settings.css';
 
@@ -11,11 +13,55 @@ const notifications = [
 ];
 
 export default function Settings() {
+    const { user, updateProfile, logout } = useAuth();
+    const navigate = useNavigate();
+    const [saving, setSaving] = useState(false);
+    const [saved, setSaved] = useState(false);
+
+    // Form state — pre-fill from user data
+    const [formName, setFormName] = useState(user?.name || '');
+    const [formEmail, setFormEmail] = useState(user?.email || '');
+    const [formPhone, setFormPhone] = useState(user?.phone || '');
+    const [formLocation, setFormLocation] = useState(user?.location || '');
+    const [formUpi, setFormUpi] = useState(user?.upiId || '');
+
     const [toggles, setToggles] = useState(
         Object.fromEntries(notifications.map(n => [n.id, n.default]))
     );
 
     const toggle = (id) => setToggles(prev => ({ ...prev, [id]: !prev[id] }));
+
+    const initials = user?.name
+        ? user.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+        : '??';
+
+    const handleSave = async () => {
+        setSaving(true);
+        try {
+            await updateProfile({
+                name: formName,
+                email: formEmail,
+                phone: formPhone,
+                location: formLocation,
+                upiId: formUpi,
+            });
+            setSaved(true);
+            setTimeout(() => setSaved(false), 2000);
+        } catch (err) {
+            alert(err.message || 'Failed to save');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
+    const joinDate = user?.createdAt
+        ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+        : 'N/A';
 
     return (
         <div className="page-wrapper">
@@ -30,35 +76,42 @@ export default function Settings() {
                         <h3 className="settings-section-title">👤 Profile</h3>
                         <div className="settings-profile">
                             <div className="settings-avatar">
-                                KS
+                                {initials}
                                 <span className="settings-avatar-edit">✏️</span>
                             </div>
                             <div className="settings-avatar-info">
-                                <h3>Krishna Soni</h3>
-                                <p>@krishna_eco • Joined Feb 2026 • Gold Tier 🏆</p>
+                                <h3>{user?.name || 'User'}</h3>
+                                <p>{user?.email || ''} • Joined {joinDate} • {user?.tier || 'Bronze'} Tier 🏆</p>
                             </div>
                         </div>
                         <div className="settings-form">
                             <div className="form-group">
                                 <label className="form-label">Full Name</label>
-                                <input className="form-input" defaultValue="Krishna Soni" />
+                                <input className="form-input" value={formName} onChange={e => setFormName(e.target.value)} />
                             </div>
                             <div className="form-group">
                                 <label className="form-label">Email</label>
-                                <input className="form-input" defaultValue="krishna@example.com" />
+                                <input className="form-input" value={formEmail} onChange={e => setFormEmail(e.target.value)} />
                             </div>
                             <div className="form-group">
                                 <label className="form-label">Phone</label>
-                                <input className="form-input" defaultValue="+91 98765 43210" />
+                                <input className="form-input" value={formPhone} onChange={e => setFormPhone(e.target.value)} placeholder="+91 98765 43210" />
                             </div>
                             <div className="form-group">
                                 <label className="form-label">Location</label>
-                                <input className="form-input" defaultValue="New Delhi, India" />
+                                <input className="form-input" value={formLocation} onChange={e => setFormLocation(e.target.value)} placeholder="City, Country" />
                             </div>
                         </div>
                         <div className="settings-actions">
-                            <button className="settings-btn save">Save Changes</button>
-                            <button className="settings-btn outline">Cancel</button>
+                            <button className="settings-btn save" onClick={handleSave} disabled={saving}>
+                                {saving ? 'Saving…' : saved ? '✅ Saved!' : 'Save Changes'}
+                            </button>
+                            <button className="settings-btn outline" onClick={() => {
+                                setFormName(user?.name || '');
+                                setFormEmail(user?.email || '');
+                                setFormPhone(user?.phone || '');
+                                setFormLocation(user?.location || '');
+                            }}>Cancel</button>
                         </div>
                     </div>
 
@@ -87,15 +140,15 @@ export default function Settings() {
                         <div className="settings-form">
                             <div className="form-group">
                                 <label className="form-label">UPI ID</label>
-                                <input className="form-input" defaultValue="krishna@upi" />
+                                <input className="form-input" value={formUpi} onChange={e => setFormUpi(e.target.value)} placeholder="you@upi" />
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Bank Account (last 4)</label>
-                                <input className="form-input" defaultValue="•••• 4210" disabled />
+                                <label className="form-label">Up-Coins Balance</label>
+                                <input className="form-input" value={`🪙 ${user?.upCoins ?? 0} coins`} disabled />
                             </div>
                         </div>
                         <div className="settings-actions">
-                            <button className="settings-btn save">Update Wallet</button>
+                            <button className="settings-btn save" onClick={handleSave} disabled={saving}>Update Wallet</button>
                         </div>
                     </div>
 
@@ -103,7 +156,7 @@ export default function Settings() {
                     <div className="settings-section">
                         <h3 className="settings-section-title">🔒 Account</h3>
                         <div className="settings-actions">
-                            <button className="settings-btn outline">Log Out</button>
+                            <button className="settings-btn outline" onClick={handleLogout}>Log Out</button>
                             <button className="settings-btn danger">Delete Account</button>
                         </div>
                     </div>

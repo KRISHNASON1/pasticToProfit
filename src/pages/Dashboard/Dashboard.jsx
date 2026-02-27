@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { getNewArrivals, getSaleProducts } from '../../data/products';
 import { rewardsData, userImpactStats } from '../../data/stats';
 import ScanModal from '../../components/ScanModal/ScanModal';
@@ -32,9 +33,11 @@ const miniStats = [
 ];
 
 export default function Dashboard() {
+    const { user } = useAuth();
     const { balance, tier, nextTier, nextTierAt } = rewardsData;
     const tierPct = Math.round((balance / nextTierAt) * 100);
     const [scanOpen, setScanOpen] = useState(false);
+    const firstName = user?.name?.split(' ')[0] || 'User';
 
     return (
         <div className="page-wrapper">
@@ -43,7 +46,7 @@ export default function Dashboard() {
             <div style={{ padding: '16px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
                 <div>
                     <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 800, marginBottom: 2 }}>
-                        Good evening, Krishna 👋
+                        Good evening, {firstName} 👋
                     </h1>
                     <p style={{ fontSize: 12, color: 'var(--clr-text-muted)' }}>
                         Thursday, 26 Feb 2026 — Your next pickup is scheduled for <strong>Friday, 8 AM</strong>

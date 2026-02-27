@@ -9,6 +9,7 @@ import {
     Search
 } from 'lucide-react';
 import { UpcycleLogo } from '../Logo/UpcycleLogo';
+import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
 const navItems = [
@@ -19,6 +20,13 @@ const navItems = [
 ];
 
 export default function Sidebar() {
+    const { user } = useAuth();
+
+    // Get initials from user name
+    const initials = user?.name
+        ? user.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+        : '👤';
+
     return (
         <aside className="sidebar">
             {/* Logo */}
@@ -68,11 +76,11 @@ export default function Sidebar() {
             {/* User */}
             <div className="sidebar-user">
                 <div className="sidebar-user-label">User Account</div>
-                <NavLink to="/login" className="sidebar-user-card" style={{ textDecoration: 'none' }}>
-                    <div className="sidebar-user-avatar">👤</div>
+                <NavLink to={user ? '/settings' : '/login'} className="sidebar-user-card" style={{ textDecoration: 'none' }}>
+                    <div className="sidebar-user-avatar">{initials}</div>
                     <div className="sidebar-user-info">
-                        <div className="sidebar-user-name">Sign In</div>
-                        <div className="sidebar-user-id">Tap to get started</div>
+                        <div className="sidebar-user-name">{user ? user.name : 'Sign In'}</div>
+                        <div className="sidebar-user-id">{user ? user.email : 'Tap to get started'}</div>
                     </div>
                     <span className="sidebar-user-more">→</span>
                 </NavLink>

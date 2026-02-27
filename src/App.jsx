@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import Cart from './components/Cart/Cart';
@@ -78,29 +79,39 @@ function MarketplaceLayout({ children }) {
   );
 }
 
+/* Protected route wrapper — redirects to /login if not authenticated */
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>Loading...</div>;
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <Routes>
-          {/* Public landing page — with navbar, no sidebar */}
-          <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+      <AuthProvider>
+        <CartProvider>
+          <Routes>
+            {/* Public landing page — with navbar, no sidebar */}
+            <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
 
-          {/* Public pages with navbar only */}
-          <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
-          <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
-          <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
+            {/* Public pages with navbar only */}
+            <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+            <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
+            <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
 
-          {/* Marketplace — navbar + cart, no sidebar */}
-          <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
+            {/* Marketplace — navbar + cart, no sidebar */}
+            <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
 
-          {/* Internal app pages — sidebar + cart */}
-          <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/rewards" element={<AppLayout><Rewards /></AppLayout>} />
-          <Route path="/support" element={<AppLayout><Support /></AppLayout>} />
-          <Route path="/settings" element={<AppLayout><Settings /></AppLayout>} />
-        </Routes>
-      </CartProvider>
+            {/* Internal app pages — sidebar + cart (protected) */}
+            <Route path="/dashboard" element={<ProtectedRoute><AppLayout><Dashboard /></AppLayout></ProtectedRoute>} />
+            <Route path="/rewards" element={<ProtectedRoute><AppLayout><Rewards /></AppLayout></ProtectedRoute>} />
+            <Route path="/support" element={<ProtectedRoute><AppLayout><Support /></AppLayout></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><AppLayout><Settings /></AppLayout></ProtectedRoute>} />
+          </Routes>
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

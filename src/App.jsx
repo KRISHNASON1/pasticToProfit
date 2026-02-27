@@ -1,17 +1,42 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import Cart from './components/Cart/Cart';
-import LandingPage from './pages/LandingPage/LandingPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Marketplace from './pages/Marketplace/Marketplace';
 import Rewards from './pages/Rewards/Rewards';
 import Support from './pages/Support/Support';
 import Settings from './pages/Settings/Settings';
+import Login from './pages/Login/Login';
 import Solutions from './pages/Solutions/Solutions';
 import EPR from './pages/EPR/EPR';
 import PublicNavbar from './components/PublicNavbar/PublicNavbar';
+import LandingPage from './pages/LandingPage/LandingPage';
 import './App.css';
+
+function SplashScreen({ onFinish }) {
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => setFadeOut(true), 1600);
+    const finishTimer = setTimeout(() => onFinish(), 2000);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(finishTimer);
+    };
+  }, [onFinish]);
+
+  return (
+    <div className={`splash-screen ${fadeOut ? 'splash-fade-out' : ''}`}>
+      <div className="splash-content">
+        <div className="splash-icon">♻️</div>
+        <h1 className="splash-title">PlasticToProfit</h1>
+        <p className="splash-tagline">Circular Economy Platform</p>
+      </div>
+    </div>
+  );
+}
 
 /* App shell with sidebar + cart (the internal platform) */
 function AppLayout({ children }) {
@@ -58,19 +83,22 @@ export default function App() {
     <BrowserRouter>
       <CartProvider>
         <Routes>
-          {/* Public pages — full-width with shared Navbar */}
+          {/* Public landing page — with navbar, no sidebar */}
           <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+
+          {/* Public pages with navbar only */}
+          <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
           <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
           <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
 
-          {/* Internal platform — sidebar layout */}
+          {/* Marketplace — navbar + cart, no sidebar */}
+          <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
+
+          {/* Internal app pages — sidebar + cart */}
           <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
           <Route path="/rewards" element={<AppLayout><Rewards /></AppLayout>} />
           <Route path="/support" element={<AppLayout><Support /></AppLayout>} />
           <Route path="/settings" element={<AppLayout><Settings /></AppLayout>} />
-
-          {/* Hybrid layout — Marketplace has no sidebar but has Cart and Public Navbar */}
-          <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
         </Routes>
       </CartProvider>
     </BrowserRouter>

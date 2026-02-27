@@ -5,33 +5,34 @@ import {
     Coins,
     MessageCircle,
     Settings,
-    Recycle,
-    Search
+    Search,
+    Store
 } from 'lucide-react';
 import { UpcycleLogo } from '../Logo/UpcycleLogo';
+import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
 const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
+    { to: '/marketplace', icon: Store, label: 'Marketplace' },
     { to: '/rewards', icon: Coins, label: 'Rewards' },
     { to: '/support', icon: MessageCircle, label: 'Support' },
     { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 export default function Sidebar() {
+    const { user } = useAuth();
+
+    const initials = user?.name
+        ? user.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+        : '??';
+
     return (
         <aside className="sidebar">
             {/* Logo */}
             <div className="sidebar-logo">
                 <UpcycleLogo size={28} theme="light" />
             </div>
-
-            {/* Marketplace link */}
-            <NavLink to="/marketplace" className={({ isActive }) => `sidebar-dropdown ${isActive ? 'active' : ''}`} style={{ textDecoration: 'none' }}>
-                <span className="sidebar-dropdown-icon">🛍️</span>
-                <span>Marketplace</span>
-                <span className="sidebar-dropdown-chevron">→</span>
-            </NavLink>
 
             {/* Search */}
             <div className="sidebar-search">
@@ -68,11 +69,11 @@ export default function Sidebar() {
             {/* User */}
             <div className="sidebar-user">
                 <div className="sidebar-user-label">User Account</div>
-                <NavLink to="/login" className="sidebar-user-card" style={{ textDecoration: 'none' }}>
-                    <div className="sidebar-user-avatar">👤</div>
+                <NavLink to={user ? '/settings' : '/login'} className="sidebar-user-card" style={{ textDecoration: 'none' }}>
+                    <div className="sidebar-user-avatar">{initials}</div>
                     <div className="sidebar-user-info">
-                        <div className="sidebar-user-name">Sign In</div>
-                        <div className="sidebar-user-id">Tap to get started</div>
+                        <div className="sidebar-user-name">{user ? user.name : 'Sign In'}</div>
+                        <div className="sidebar-user-id">{user ? user.email : 'Tap to get started'}</div>
                     </div>
                     <span className="sidebar-user-more">→</span>
                 </NavLink>

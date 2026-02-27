@@ -3,6 +3,42 @@
     animation: fadeIn 0.4s ease;
 }
 
+/* Cash Out Modal */
+.cashout-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.cashout-modal {
+    background: var(--clr-surface);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    width: 400px;
+    max-width: 90vw;
+    box-shadow: var(--shadow-lg);
+}
+
+.cashout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cashout-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .rewards-page-title {
     font-size: 24px;
     font-weight: 700;
@@ -279,4 +315,75 @@
 
 .tx-amount.negative {
     color: var(--clr-danger);
+}
+
+/* Plastic Bag section */
+.rewards-bag-section {
+    margin-bottom: 24px;
+}
+
+.rewards-bag-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rewards-bag-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border-light);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.rewards-bag-card:hover {
+    border-color: var(--clr-primary-200);
+    background: var(--clr-primary-50);
+}
+
+.rewards-bag-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.rewards-bag-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rewards-bag-name {
+    font-size: 13px;
+    font-weight: 600;
+    display: block;
+}
+
+.rewards-bag-type {
+    font-size: 10px;
+    color: var(--clr-text-muted);
+    display: block;
+}
+
+.rewards-bag-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--clr-text-secondary);
+}
+
+.rewards-bag-coins {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--clr-primary-600);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
 }

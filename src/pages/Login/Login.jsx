@@ -1,14 +1,41 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Login.css';
 
 export default function Login() {
     const [tab, setTab] = useState('signin');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const { signin, signup } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/');
+        setError('');
+        setLoading(true);
+
+        try {
+            if (tab === 'signup') {
+                if (password !== confirmPassword) {
+                    setError('Passwords do not match');
+                    setLoading(false);
+                    return;
+                }
+                await signup(name, email, password);
+            } else {
+                await signin(email, password);
+            }
+            navigate('/dashboard');
+        } catch (err) {
+            setError(err.message || 'Something went wrong');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -68,17 +95,32 @@ export default function Login() {
                     <div className="login-tabs">
                         <button
                             className={`login-tab ${tab === 'signin' ? 'active' : ''}`}
-                            onClick={() => setTab('signin')}
+                            onClick={() => { setTab('signin'); setError(''); }}
                         >
                             Sign In
                         </button>
                         <button
                             className={`login-tab ${tab === 'signup' ? 'active' : ''}`}
-                            onClick={() => setTab('signup')}
+                            onClick={() => { setTab('signup'); setError(''); }}
                         >
                             Sign Up
                         </button>
                     </div>
+
+                    {/* Error message */}
+                    {error && (
+                        <div style={{
+                            background: 'rgba(239,68,68,0.1)',
+                            border: '1px solid rgba(239,68,68,0.3)',
+                            color: '#ef4444',
+                            padding: '10px 14px',
+                            borderRadius: 8,
+                            fontSize: 13,
+                            marginBottom: 12,
+                        }}>
+                            {error}
+                        </div>
+                    )}
 
                     {/* Form */}
                     <form onSubmit={handleSubmit}>
@@ -89,6 +131,9 @@ export default function Login() {
                                     type="text"
                                     className="login-field-input"
                                     placeholder="Enter your full name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
                                 />
                             </div>
                         )}
@@ -96,9 +141,12 @@ export default function Login() {
                         <div className="login-field">
                             <label>Email Address</label>
                             <input
-                                type="email"
+                                type="text"
                                 className="login-field-input"
                                 placeholder="you@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -108,6 +156,9 @@ export default function Login() {
                                 type="password"
                                 className="login-field-input"
                                 placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -118,6 +169,9 @@ export default function Login() {
                                     type="password"
                                     className="login-field-input"
                                     placeholder="Confirm your password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
                                 />
                             </div>
                         )}
@@ -128,8 +182,10 @@ export default function Login() {
                             </div>
                         )}
 
-                        <button type="submit" className="login-submit">
-                            {tab === 'signin' ? 'Sign In' : 'Create Account'}
+                        <button type="submit" className="login-submit" disabled={loading}>
+                            {loading
+                                ? 'Please wait…'
+                                : tab === 'signin' ? 'Sign In' : 'Create Account'}
                         </button>
                     </form>
 

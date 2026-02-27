@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 5173,
+    allowedHosts: ['pastictoprofit.onrender.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:5001',

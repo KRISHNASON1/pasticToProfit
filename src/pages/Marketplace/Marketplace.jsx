@@ -29,8 +29,15 @@ export default function Marketplace() {
     const isDiscountMode = searchParams.get('discount') === 'true';
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + '/api/products')
-            .then(res => res.json())
+        const baseUrl = import.meta.env.VITE_API_URL || '';
+        fetch(`${baseUrl}/api/products`)
+            .then(res => {
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new TypeError("Oops, we haven't got JSON!");
+                }
+                return res.json();
+            })
             .then(data => {
                 setProducts(data.products || []);
                 setLoading(false);

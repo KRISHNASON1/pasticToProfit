@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
             setLoading(false);
             return;
         }
-        fetch(import.meta.env.VITE_API_URL + '/api/auth/me', {
+        fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/me', {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(res => {
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     }, [token]);
 
     const signup = useCallback(async (name, email, password) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/signup', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password }),
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     const signin = useCallback(async (email, password) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/signin', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/signin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     const updateProfile = useCallback(async (updates) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/me', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/me', {
             method: 'PUT',
             headers: authHeaders(),
             body: JSON.stringify(updates),
@@ -81,7 +81,7 @@ export function AuthProvider({ children }) {
     }, [authHeaders]);
 
     const addToBag = useCallback(async (items, totalCoins) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/bag', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/bag', {
             method: 'POST',
             headers: authHeaders(),
             body: JSON.stringify({ items, totalCoins }),
@@ -93,7 +93,7 @@ export function AuthProvider({ children }) {
     }, [authHeaders]);
 
     const clearBag = useCallback(async () => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/bag', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/bag', {
             method: 'DELETE',
             headers: authHeaders(),
         });
@@ -103,7 +103,7 @@ export function AuthProvider({ children }) {
     }, [authHeaders]);
 
     const redeemDiscount = useCallback(async (coinsSpent) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/redeem', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/redeem', {
             method: 'POST',
             headers: authHeaders(),
             body: JSON.stringify({ coinsSpent }),
@@ -116,7 +116,7 @@ export function AuthProvider({ children }) {
 
     const refreshUser = useCallback(async () => {
         if (!token) return;
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
         if (res.ok) {
             const data = await res.json();
             setUser(data.user);
@@ -124,7 +124,7 @@ export function AuthProvider({ children }) {
     }, [token]);
 
     const cashOut = useCallback(async (coins) => {
-        const res = await fetch(import.meta.env.VITE_API_URL + '/api/auth/cashout', {
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/cashout', {
             method: 'POST',
             headers: authHeaders(),
             body: JSON.stringify({ coins }),

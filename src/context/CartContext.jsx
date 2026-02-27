@@ -24,7 +24,7 @@ export function CartProvider({ children }) {
     const syncToBackend = async (newItems) => {
         if (user && token) {
             try {
-                await fetch(import.meta.env.VITE_API_URL + '/api/auth/cart', {
+                await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/cart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

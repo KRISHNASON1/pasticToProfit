@@ -146,7 +146,7 @@ export default function LandingPage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + '/api/products')
+    fetch((import.meta.env.VITE_API_URL || '') + '/api/products')
       .then(res => res.json())
       .then(data => {
         const prods = data.products || [];

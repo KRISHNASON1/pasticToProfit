@@ -71,7 +71,7 @@ export default function DIY() {
         if (!token) return navigate('/login');
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + '/api/products', {
+            const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -618,20 +618,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── QUOTE / MANIFESTO ─── */}
-      <section className="lp-quote" ref={quoteRef}>
-        <div className="lp-quote-inner reveal" ref={quoteRef}>
-          <div className="lp-quote-mark">"</div>
-          <p className="lp-quote-text">
-            We are not here to reduce that number. We are here to make it{' '}
-            <em>profitable</em> — for <em>everyone</em> involved.
-          </p>
-          <span className="lp-quote-attr">
-            Kabadiwala collects it. Recykal documents it. <strong>We elevate it.</strong>
-          </span>
-        </div>
-      </section>
-
 
 
       {/* ─── B2B CORPORATE EPR ─── */}

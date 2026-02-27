@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import Header from '../../components/Header/Header';
 import {
     Recycle,
     Home,
@@ -88,7 +87,6 @@ export default function Solutions() {
 
     return (
         <div className="page-wrapper">
-            <Header showTabs={false} />
             <div className="solutions-page">
                 {/* ── Hero ── */}
                 <section className="sol-hero">

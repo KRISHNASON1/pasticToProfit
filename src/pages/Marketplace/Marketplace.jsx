@@ -100,56 +100,43 @@ export default function Marketplace() {
 
     return (
         <div className="marketplace">
-            {/* Header */}
-            <header className="mp-header">
-                <div className="mp-header-left">
-                    <button className="mp-back-btn" onClick={() => navigate(-1)} title="Back">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-                    </button>
-                    <div className="mp-logo" onClick={() => setActiveCategory('all')}>
-                        <svg className="mp-logo-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
-                        <span className="mp-logo-text">Up-Cycle</span>
-                        <span className="mp-logo-tag">Store</span>
+
+            <nav className="mp-category-nav">
+                <div className="mp-category-links">
+                    {categories.map(cat => (
+                        <button
+                            key={cat.id}
+                            className={`mp-category-link ${activeCategory === cat.id ? 'active' : ''}`}
+                            onClick={() => setActiveCategory(cat.id)}
+                        >
+                            {cat.label}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="mp-nav-utilities">
+                    <div className="mp-header-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                        <input
+                            type="text"
+                            placeholder="Search Store..."
+                            value={searchQuery}
+                            onChange={e => setSearchQuery(e.target.value)}
+                        />
+                        {searchQuery && (
+                            <button className="mp-search-clear" onClick={() => setSearchQuery('')}>×</button>
+                        )}
                     </div>
-                </div>
 
-                <div className="mp-header-search">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                    <input
-                        type="text"
-                        placeholder="Search products..."
-                        value={searchQuery}
-                        onChange={e => setSearchQuery(e.target.value)}
-                    />
-                    {searchQuery && (
-                        <button className="mp-search-clear" onClick={() => setSearchQuery('')}>×</button>
-                    )}
-                </div>
-
-                <div className="mp-header-right">
                     <button className="mp-header-icon-btn" title="Wishlist">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-                        <span className="mp-header-btn-label">Wishlist</span>
                     </button>
+
                     <button className="mp-header-icon-btn mp-cart-btn" onClick={() => setIsOpen(true)} title="Cart">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
-                        <span className="mp-header-btn-label">Cart</span>
                         {totalItems > 0 && <span className="mp-header-cart-badge">{totalItems}</span>}
                     </button>
                 </div>
-            </header>
-
-            {/* Category Nav */}
-            <nav className="mp-category-nav">
-                {categories.map(cat => (
-                    <button
-                        key={cat.id}
-                        className={`mp-category-link ${activeCategory === cat.id ? 'active' : ''}`}
-                        onClick={() => setActiveCategory(cat.id)}
-                    >
-                        {cat.label}
-                    </button>
-                ))}
             </nav>
 
             {/* Promo Ticker */}
@@ -241,6 +228,7 @@ export default function Marketplace() {
 
             {/* Main */}
             <main className="mp-main">
+
                 {/* Filter Chips */}
                 <div className="mp-quick-filters">
                     <button className={`mp-quick-chip ${activeCategory === 'all' ? 'active' : ''}`} onClick={() => setActiveCategory('all')}>All Products</button>

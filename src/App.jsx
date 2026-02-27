@@ -60,21 +60,6 @@ function AppLayout({ children }) {
 
 
 
-/* Marketplace Layout — no sidebar, with Public Navbar and Cart */
-function MarketplaceLayout({ children }) {
-  return (
-    <div className="app-layout">
-      <PublicNavbar />
-      <main className="main-content" style={{ marginLeft: 0, padding: 0 }}>
-        <div className="main-inner" style={{ borderRadius: 0, marginTop: '70px', minHeight: 'calc(100vh - 70px)' }}>
-          {children}
-        </div>
-      </main>
-      <Cart />
-    </div>
-  );
-}
-
 /* Protected route wrapper — redirects to /login if not authenticated */
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -93,12 +78,12 @@ export default function App() {
             <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
             <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
             <Route path="/earn" element={<PublicLayout><Earn /></PublicLayout>} />
-            <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
             <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
 
-            {/* Marketplace — navbar + cart, no sidebar */}
-            <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />
+            {/* Marketplace — standalone public route */}
+            <Route path="/marketplace" element={<PublicLayout><Marketplace /><Cart /></PublicLayout>} />
 
             {/* Internal app pages — sidebar + cart (protected) */}
             <Route path="/dashboard" element={<ProtectedRoute><AppLayout><Dashboard /></AppLayout></ProtectedRoute>} />

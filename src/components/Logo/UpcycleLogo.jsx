@@ -37,8 +37,9 @@ export const UpcycleLogo = ({ size = 32, theme = 'dark', showText = true, classN
                         fontSize: size * 1.1,
                         color: textColor,
                         letterSpacing: '-0.02em',
-                        lineHeight: 1,
-                        marginBottom: size * 0.05
+                        lineHeight: '1',
+                        margin: 0,
+                        padding: 0
                     }}
                 >
                     Upcycle

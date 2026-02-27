@@ -7,6 +7,7 @@ export default function PublicNavbar() {
     const [navScrolled, setNavScrolled] = useState(false);
     const location = useLocation();
     const isLandingPage = location.pathname === '/';
+    const forceDark = !isLandingPage;
 
     useEffect(() => {
         const handleScroll = () => setNavScrolled(window.scrollY > 60);
@@ -14,11 +15,10 @@ export default function PublicNavbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const isDarkHero = location.pathname === '/epr';
-    const logoTheme = (isDarkHero && !navScrolled) ? 'light' : 'dark';
+    const logoTheme = (forceDark || navScrolled) ? 'dark' : 'dark';
 
     return (
-        <nav className={`lp-nav ${navScrolled ? 'scrolled' : ''}`}>
+        <nav className={`lp-nav ${navScrolled ? 'scrolled' : ''} ${forceDark ? 'force-dark' : ''}`}>
             <Link to="/" className="lp-nav-logo" style={{ textDecoration: 'none' }}>
                 <UpcycleLogo size={28} theme={logoTheme} />
             </Link>

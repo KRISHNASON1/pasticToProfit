@@ -85,28 +85,16 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-<<<<<<< branch1
-      <CartProvider>
-        <Routes>
-          {/* Public landing page — with navbar, no sidebar */}
-          <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
-          <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
-          <Route path="/earn" element={<PublicLayout><Earn /></PublicLayout>} />
-          <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
-          <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
-          <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
-=======
       <AuthProvider>
         <CartProvider>
           <Routes>
             {/* Public landing page — with navbar, no sidebar */}
             <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
-
-            {/* Public pages with navbar only */}
+            <Route path="/diy" element={<PublicLayout><DIY /></PublicLayout>} />
+            <Route path="/earn" element={<PublicLayout><Earn /></PublicLayout>} />
             <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
             <Route path="/solutions" element={<PublicLayout><Solutions /></PublicLayout>} />
             <Route path="/epr" element={<PublicLayout><EPR /></PublicLayout>} />
->>>>>>> branch1
 
             {/* Marketplace — navbar + cart, no sidebar */}
             <Route path="/marketplace" element={<MarketplaceLayout><Marketplace /></MarketplaceLayout>} />

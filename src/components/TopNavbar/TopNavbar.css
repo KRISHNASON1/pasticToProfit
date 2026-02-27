@@ -1,0 +1,161 @@
+.top-navbar {
+    width: 100%;
+    height: 70px;
+    background: var(--clr-sidebar-bg);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Logo */
+.top-navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 32px;
+}
+
+/* Search */
+.top-navbar-search {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color var(--transition-fast);
+    width: 250px;
+    margin-right: 24px;
+}
+
+.top-navbar-search:focus-within {
+    border-color: var(--clr-primary-300);
+}
+
+.top-navbar-search-icon {
+    font-size: 13px;
+    opacity: 0.5;
+    color: var(--clr-sidebar-text);
+}
+
+.top-navbar-search input {
+    background: transparent;
+    color: var(--clr-text-light);
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.top-navbar-search input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.top-navbar-search-shortcut {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+}
+
+/* Nav section */
+.top-navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.top-navbar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    color: var(--clr-sidebar-text);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+.top-navbar-nav-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--clr-text-light);
+}
+
+.top-navbar-nav-item.active {
+    background: var(--clr-sidebar-active-bg);
+    color: var(--clr-sidebar-active);
+    font-weight: 600;
+}
+
+.top-navbar-nav-icon {
+    font-size: 16px;
+    width: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* User */
+.top-navbar-user {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.top-navbar-user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    text-decoration: none;
+}
+
+.top-navbar-user-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.top-navbar-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--clr-primary-300), var(--clr-primary-500));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.top-navbar-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-navbar-user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--clr-text-light);
+}
+
+.top-navbar-user-id {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+}

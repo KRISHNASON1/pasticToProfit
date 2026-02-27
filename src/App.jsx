@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
-import Sidebar from './components/Sidebar/Sidebar';
+import TopNavbar from './components/TopNavbar/TopNavbar';
 import Cart from './components/Cart/Cart';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Marketplace from './pages/Marketplace/Marketplace';
@@ -42,11 +42,12 @@ function SplashScreen({ onFinish }) {
   );
 }
 
-/* App shell with sidebar + cart (the internal platform) */
+
+/* App shell with TopNavbar + cart (the internal platform) */
 function AppLayout({ children }) {
   return (
     <div className="app-layout">
-      <Sidebar />
+      <TopNavbar />
       <main className="main-content">
         <div className="main-inner">
           {children}

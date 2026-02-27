@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import {
     LayoutDashboard,
-    ShoppingBag,
     Coins,
     MessageCircle,
     Settings,
@@ -10,7 +9,7 @@ import {
 } from 'lucide-react';
 import { UpcycleLogo } from '../Logo/UpcycleLogo';
 import { useAuth } from '../../context/AuthContext';
-import './Sidebar.css';
+import './TopNavbar.css';
 
 const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
@@ -20,7 +19,7 @@ const navItems = [
     { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
-export default function Sidebar() {
+export default function TopNavbar() {
     const { user } = useAuth();
 
     const initials = user?.name
@@ -28,56 +27,49 @@ export default function Sidebar() {
         : '??';
 
     return (
-        <aside className="sidebar">
+        <header className="top-navbar">
             {/* Logo */}
-            <div className="sidebar-logo">
-                <UpcycleLogo size={28} theme="light" />
+            <div className="top-navbar-logo">
+                <UpcycleLogo size={24} theme="light" />
             </div>
 
             {/* Search */}
-            <div className="sidebar-search">
-                <span className="sidebar-search-icon">
+            <div className="top-navbar-search">
+                <span className="top-navbar-search-icon">
                     <Search size={14} strokeWidth={2} />
                 </span>
                 <input type="text" placeholder="Search..." />
-                <span className="sidebar-search-shortcut">⌘K</span>
+                <span className="top-navbar-search-shortcut">⌘K</span>
             </div>
 
             {/* Nav */}
-            <div className="sidebar-nav-label">Navigation</div>
-            <nav className="sidebar-nav">
+            <nav className="top-navbar-nav">
                 {navItems.map(item => (
                     <NavLink
                         key={item.to}
                         to={item.to}
                         end={item.end}
                         className={({ isActive }) =>
-                            `sidebar-nav-item ${isActive ? 'active' : ''}`
+                            `top-navbar-nav-item ${isActive ? 'active' : ''}`
                         }
                     >
-                        <span className="sidebar-nav-icon">
+                        <span className="top-navbar-nav-icon">
                             <item.icon size={16} strokeWidth={2} />
                         </span>
                         <span>{item.label}</span>
-                        {item.badge && (
-                            <span className={`sidebar-nav-badge ${item.badgeColor}`}>{item.badge}</span>
-                        )}
                     </NavLink>
                 ))}
             </nav>
 
             {/* User */}
-            <div className="sidebar-user">
-                <div className="sidebar-user-label">User Account</div>
-                <NavLink to={user ? '/settings' : '/login'} className="sidebar-user-card" style={{ textDecoration: 'none' }}>
-                    <div className="sidebar-user-avatar">{initials}</div>
-                    <div className="sidebar-user-info">
-                        <div className="sidebar-user-name">{user ? user.name : 'Sign In'}</div>
-                        <div className="sidebar-user-id">{user ? user.email : 'Tap to get started'}</div>
+            <div className="top-navbar-user">
+                <NavLink to={user ? '/settings' : '/login'} className="top-navbar-user-card">
+                    <div className="top-navbar-user-avatar">{initials}</div>
+                    <div className="top-navbar-user-info">
+                        <div className="top-navbar-user-name">{user ? user.name : 'Sign In'}</div>
                     </div>
-                    <span className="sidebar-user-more">→</span>
                 </NavLink>
             </div>
-        </aside>
+        </header>
     );
 }

@@ -1,0 +1,34 @@
+services:
+  # Backend API
+  - type: web
+    name: plastic-to-profit-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # Set this in Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set this in Render dashboard
+      - key: PORT
+        value: 10000
+
+  # Frontend (Static Site)
+  - type: web
+    name: plastic-to-profit-frontend
+    env: static
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false # Set to your backend URL
+      - key: VITE_GEMINI_API_KEY
+        sync: false
+      - key: VITE_GOOGLE_VISION_API_KEY
+        sync: false

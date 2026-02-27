@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 import auth from '../middleware/auth.js';
 
@@ -36,22 +37,38 @@ router.post('/signup', async (req, res) => {
 // ── SIGN IN ────────────────────────────────────────────
 router.post('/signin', async (req, res) => {
     try {
+        console.log('🔐 Sign in attempt for:', req.body.email);
+        
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
+        
+        // Check if MongoDB is connected
+        if (mongoose.connection.readyState !== 1) {
+            console.error('❌ MongoDB not connected. State:', mongoose.connection.readyState);
+            return res.status(503).json({ 
+                error: 'Database connection unavailable',
+                details: 'Please try again in a moment'
+            });
+        }
+        
         const user = await User.findOne({ email });
         if (!user || user.password !== password) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
         const token = makeToken(user);
+        console.log('✅ Sign in successful for:', email);
         res.json({
             token,
             user: { id: user._id, name: user.name, email: user.email, upCoins: user.upCoins, tier: user.tier, bag: user.bag, transactions: user.transactions },
         });
     } catch (err) {
-        console.error('Signin error:', err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('❌ Signin error:', err);
+        res.status(500).json({ 
+            error: 'Server error',
+            message: err.message 
+        });
     }
 });
 

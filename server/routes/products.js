@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import Product from '../models/Product.js';
 import auth from '../middleware/auth.js';
 
@@ -7,11 +8,26 @@ const router = Router();
 // GET /api/products — return all products
 router.get('/', async (req, res) => {
     try {
+        console.log('📦 Fetching products...');
+        
+        // Check if MongoDB is connected
+        if (mongoose.connection.readyState !== 1) {
+            console.error('❌ MongoDB not connected. State:', mongoose.connection.readyState);
+            return res.status(503).json({ 
+                error: 'Database connection unavailable',
+                details: 'Please try again in a moment'
+            });
+        }
+        
         const products = await Product.find({});
+        console.log(`✅ Found ${products.length} products`);
         res.json({ products });
     } catch (err) {
-        console.error('Products error:', err);
-        res.status(500).json({ error: 'Server error retrieving products' });
+        console.error('❌ Products error:', err);
+        res.status(500).json({ 
+            error: 'Server error retrieving products',
+            message: err.message 
+        });
     }
 });
 

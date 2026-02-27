@@ -29,7 +29,7 @@ export default function Marketplace() {
     const isDiscountMode = searchParams.get('discount') === 'true';
 
     useEffect(() => {
-        fetch('/api/products')
+        fetch(import.meta.env.VITE_API_URL + '/api/products')
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products || []);

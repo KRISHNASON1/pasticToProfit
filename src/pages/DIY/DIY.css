@@ -33,9 +33,9 @@
     color: var(--diy-white);
     min-height: 100vh;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
     /* Make sure it's under the sticky navbar but looks good */
-    padding-top: 60px;
+    padding-top: 72px;
 }
 
 /* ============================================

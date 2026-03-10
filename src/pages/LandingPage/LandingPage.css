@@ -778,6 +778,7 @@
    ============================================ */
 .lp-b2b {
   background: var(--lp-off-white);
+  padding-bottom: 40px;
 }
 
 .lp-b2b-inner {
@@ -2290,7 +2291,7 @@
    ============================================ */
 .lp-why-we-win {
   background: #f5f4ef;
-  padding: 120px 48px;
+  padding: 60px 48px 120px;
 }
 
 .lp-www-inner {

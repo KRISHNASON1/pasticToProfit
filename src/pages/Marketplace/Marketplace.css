@@ -32,6 +32,7 @@
     width: 100%;
     font-family: var(--font-body, 'Inter', sans-serif);
     color: var(--mp-black);
+    padding-top: 72px;
 }
 
 /* ---- HEADER ---- */
@@ -213,16 +214,30 @@
 .mp-category-nav {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background: var(--mp-surface);
     padding: 6px 32px;
-    overflow-x: auto;
-    scrollbar-width: none;
     position: sticky;
-    top: 64px;
+    top: 70px;
     z-index: 90;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    gap: 16px;
+}
+
+.mp-category-links {
+    display: flex;
+    align-items: center;
     gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+}
+
+.mp-nav-utilities {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
 }
 
 .mp-category-nav::-webkit-scrollbar {
